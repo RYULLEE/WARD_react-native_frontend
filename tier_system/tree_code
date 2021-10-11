@@ -11,8 +11,8 @@ from sklearn.metrics import mean_squared_error as mse
 from sklearn.model_selection import train_test_split, StratifiedKFold, KFold
 from lightgbm import LGBMRegressor
 
-train_data = pd.read_csv("WARD_Database/tier_system/train.csv")
-test_data = pd.read_csv("WARD_Database/tier_system/test.csv")
+train_data = pd.read_csv("tier_system/train.csv")
+test_data = pd.read_csv("tier_system/test.csv")
 
 train_label = train_data["target"]
 train_data = train_data.drop(["target"], axis=1)
@@ -43,3 +43,4 @@ predict = pd.Series(predict)
 difference = (test_label - predict)**2
 size = len(test_label)
 rmse = (difference.sum()/size)*0.5
+print (rmse)

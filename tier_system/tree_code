@@ -31,7 +31,7 @@ for train_idx, val_idx in folds.split(train_data):
     val_y = train_label[val_idx]
     
     model = LGBMRegressor(objective= "regression", max_depth= 5, n_estimators= 2000, learning_rate= 0.01, num_leaves = 31, n_jobs=-1)
-    model.fit(train_x, train_y, eval_set=[(val_x, val_y)], eval_metric=["rmse"], early_stopping_rounds=300, verbose=500)
+    model.fit(train_x, train_y, eval_set=[(val_x, val_y)], eval_metric=["rmse"], early_stopping_rounds=300, verbose=300)
     models.append(model)
     
 result = []
@@ -39,5 +39,7 @@ for i in models:
     result.append(i.predict(test_data))
 
 predict = np.mean(result, axis = 0)
-
-print(predict)
+predict = pd.Series(predict)
+difference = (test_label - predict)**2
+size = len(test_label)
+rmse = (difference.sum()/size)*0.5

@@ -28,14 +28,8 @@ export const home = () => {
       <Container>
         <StyledText>카테고리</StyledText>
         <StyledText>카테고리dddd</StyledText>
-        <ScrollableTabView 
-      >
-
-        <Text key={'1'} tabLabel={'first tab '} >1111</Text>
-        <Text key={'2'} tabLabel={'second tab '} >1111</Text>
-        <Text key={'3'} tabLabel={'third tab '} >1111</Text>
+        <StyledText>카테고리dddd</StyledText>
         
-      </ScrollableTabView>
       </Container>
     );
   };
@@ -43,6 +37,7 @@ export const home = () => {
   export const market = () => {
     return (
       <Container>
+        <StyledText>다운로드 마켓</StyledText>
         <StyledText>다운로드 마켓</StyledText>
       </Container>
     );

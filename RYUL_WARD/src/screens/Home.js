@@ -10,7 +10,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 //import Tabs from '../navigations/home_slide_tab';
 //import { TabView, SceneMap } from 'react-native-tab-view';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
-
+import Ranking from '../components/ranking';
 
 
 const Container = styled.SafeAreaView`
@@ -149,11 +149,11 @@ const Home = ({ navigation }) => {
 
         >
 
-          <Text tabLabel={'적중률'} >
-            1111
+          <Ranking tabLabel={'적중률'} />
             
-          </Text>
-          <Text tabLabel={'수익률'} >2222</Text>
+            
+          
+          <Ranking tabLabel={'수익률'} />
           <Text tabLabel={'정밀도'} >3333</Text>
           
         </ScrollableTabView>

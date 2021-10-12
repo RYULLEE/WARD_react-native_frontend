@@ -1,22 +1,38 @@
-import React from 'react';
-import { Button, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import React,{Component} from 'react';
+import { Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SliderBox } from 'react-native-image-slider-box';
+//import TabViewExample from '../navigations/home_slide_tab';
+//import ScrollableTabView,{ ScrollableTabBar }  from 'react-native-scrollable-tab-view';
+//import { render } from 'react-router-dom';
+//import Tabs from '../navigations/home_slide_tab';
+//import { TabView, SceneMap } from 'react-native-tab-view';
+import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
+
+
 
 const Container = styled.SafeAreaView`
-  
+  height: 300px;
   align-items: center;
+  
 `;
 
+
 const styles = StyleSheet.create({ 
-  subtitle: {
+  subtitle_2: {
     fontSize: 18,
     fontFamily: 'NotoSansKR_500Medium',
     marginLeft : 16,
-    marginTop : Platform.OS === 'ios' ? 15 : 5,
+    marginTop : Platform.OS === 'ios' ? 25 : 5,
   }, 
+  subtitle: {
+    fontFamily: 'NotoSansKR_500Medium',
+    fontSize : 18,
+    marginLeft : 16,
+    marginTop : Platform.OS === 'ios' ? 40 : 20,
+  },
   rowcontatiner: {
     flexDirection : 'row',
   },
@@ -28,7 +44,13 @@ const styles = StyleSheet.create({
   al_button_2 : {
     marginLeft : 10,
     marginTop : Platform.OS === 'ios' ? 10 : 0,
-  }
+  },
+  tabBarTextStyle: {
+    fontSize: 14,
+    fontFamily:'NotoSansKR_400Regular',
+  },
+  
+
 });
  
 /*
@@ -48,12 +70,19 @@ const getwidth = () => {
     return <Home width={width}/>;
 };
 
+const ranking_list = styled.View`
+
+  flex:1;
+  height: 200px;
+
+`;
+
 const Home = ({ navigation }) => {
     
-  
+ 
   return (
       <SafeAreaView>
-        
+        <ScrollView>
         <SliderBox images={[
           require('../image/big_picture.png'),
           require('../image/big_picture2.png'),
@@ -75,7 +104,7 @@ const Home = ({ navigation }) => {
           }}
          
         />   
-      <Text style={styles.subtitle}>최근 본 알고리즘</Text>
+      <Text style={styles.subtitle_2}>최근 본 알고리즘</Text>
       
       <ScrollView horizontal = {true} style={styles.rowcontatiner}>
         <TouchableOpacity style={styles.al_button_1} >
@@ -113,12 +142,32 @@ const Home = ({ navigation }) => {
 
       </ScrollView>
 
+      <Text style={styles.subtitle}>알고리즘 랭킹</Text>
+      <Container>
+        <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
+        tabBarTextStyle={styles.tabBarTextStyle}
 
+        >
+
+          <Text tabLabel={'적중률'} >
+            1111
+            
+          </Text>
+          <Text tabLabel={'수익률'} >2222</Text>
+          <Text tabLabel={'정밀도'} >3333</Text>
+          
+        </ScrollableTabView>
+      </Container>
+      
+      <Text style={styles.subtitle}>알고리즘 랭킹</Text>
+      <Text style={styles.subtitle}>알고리즘 랭킹</Text>
+
+      </ScrollView>
       </SafeAreaView> 
         
       
     );
-    
+        
   };
   
   export default Home;

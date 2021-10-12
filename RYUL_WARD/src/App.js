@@ -13,6 +13,14 @@ import {
 } from '@expo-google-fonts/noto-sans-kr'
 import {useFonts} from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { LogBox } from "react-native";
+
+console.disableYellowBox = true;
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreLogs([
+  "Warning: Calling `getNode()` on the ref of an Animated component is no longer necessary. You can now directly use the ref instead. This method will be removed in a future release., ReactNativeFiberHostComponent",
+]);
+
 
 const Container = styled.View`
   flex:1;

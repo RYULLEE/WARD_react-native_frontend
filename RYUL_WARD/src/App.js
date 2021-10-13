@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 //import MainStack from './navigations/MainStack';
 import TabNavigation from './navigations/Tab';
@@ -31,14 +31,16 @@ const Container = styled.View`
 
 const App = () => {
 
-  
+  const [includeFontPadding, setIncludeFontPadding] = useState(false);
+  const [textVerticalAlignIdx, setTextVerticalAlignIdx] = useState(0);
   let [fontsLoaded, error]= useFonts({
     NotoSansKR_100Thin,
     NotoSansKR_300Light,
     NotoSansKR_400Regular,
     NotoSansKR_500Medium,
     NotoSansKR_700Bold,
-    NotoSansKR_900Black 
+    NotoSansKR_900Black,
+    
   });
 
   if(!fontsLoaded){

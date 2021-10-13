@@ -10,7 +10,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 //import Tabs from '../navigations/home_slide_tab';
 //import { TabView, SceneMap } from 'react-native-tab-view';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
-
+import Ranking from '../components/ranking';
 
 
 const Container = styled.SafeAreaView`
@@ -159,8 +159,25 @@ const Home = ({ navigation }) => {
           </ScrollableTabView>
         </Container>
 
-        <Text style={styles.subtitle}>알고리즘 랭킹</Text>
-        <Text style={styles.subtitle}>알고리즘 랭킹</Text>
+      <Text style={styles.subtitle}>알고리즘 랭킹</Text>
+      <Container>
+        <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
+        tabBarTextStyle={styles.tabBarTextStyle}
+
+        >
+
+          <Ranking tabLabel={'적중률'} />
+            
+            
+          
+          <Ranking tabLabel={'수익률'} />
+          <Text tabLabel={'정밀도'} >3333</Text>
+          
+        </ScrollableTabView>
+      </Container>
+      
+      <Text style={styles.subtitle}>알고리즘 랭킹</Text>
+      <Text style={styles.subtitle}>알고리즘 랭킹</Text>
 
       </ScrollView>
     </SafeAreaView>

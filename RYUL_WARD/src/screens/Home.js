@@ -11,6 +11,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 //import { TabView, SceneMap } from 'react-native-tab-view';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import Ranking from '../components/ranking';
+import { NavigationContainer } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 
@@ -283,38 +284,22 @@ const Home = ({ navigation }) => {
 
         </ScrollView>
 
-        <Text style={styles.subtitle}>알고리즘 랭킹</Text>
-        <Container>
-          <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
-            tabBarTextStyle={styles.tabBarTextStyle}
-
-          >
-
-            <Text tabLabel={'적중률'} >
-              1111
-
-            </Text>
-            <Text tabLabel={'수익률'} >2222</Text>
-            <Text tabLabel={'정밀도'} >3333</Text>
-
-          </ScrollableTabView>
-        </Container>
-
       <Text style={styles.subtitle}>알고리즘 랭킹</Text>
       <View style={styles.Rank_Container}>
         <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
         tabBarTextStyle={styles.tabBarTextStyle}
         
         >
-
-          <Ranking tabLabel={'적중률'} />         
+         
+          <Ranking tabLabel={'적중률'} />  
+          
           <Ranking tabLabel={'수익률'} />
           <Ranking tabLabel={'정밀도'} />
           
         </ScrollableTabView>
       </View>
       
-      <TouchableOpacity>
+      <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
           <View style={styles.etc_button}>
             <Text style={styles.etc_text}>
               더 보기

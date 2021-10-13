@@ -3,6 +3,9 @@ import { Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAr
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+
 
 const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({ 
@@ -88,7 +91,7 @@ const Large_Container = styled.View`
   
 `;
 
-const Ranking = () => {
+const Ranking = ({navigation}) => {
 
     const [includeFontPadding, setIncludeFontPadding] = useState(false);
     return(

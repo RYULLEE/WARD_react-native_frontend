@@ -5,6 +5,7 @@ import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
+import { withNavigation } from 'react-navigation';
 
 
 const width = Dimensions.get('window').width;
@@ -91,12 +92,13 @@ const Large_Container = styled.View`
   
 `;
 
-const Ranking = ({navigation}) => {
+const Ranking = ({CATEGORY, ALGORITHM}) => {
 
+    const navigation = useNavigation();
     const [includeFontPadding, setIncludeFontPadding] = useState(false);
     return(
         <Large_Container>
-        <TouchableOpacity>
+        <TouchableOpacity  onPress= {() => navigation.navigate('ALGORITHM')}>
         <RowContainer_1 width={width}>
             <Image
               style={{height:wp('100%')/373*90 , width: wp('100%')/373*156, borderRadius : 10,}}

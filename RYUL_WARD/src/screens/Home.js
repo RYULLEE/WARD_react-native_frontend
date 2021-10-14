@@ -291,15 +291,15 @@ const Home = ({ navigation }) => {
         
         >
          
-          <Ranking tabLabel={'적중률'} />  
-          
+          <Ranking tabLabel={'적중률'}/>  
+        
           <Ranking tabLabel={'수익률'} />
           <Ranking tabLabel={'정밀도'} />
           
         </ScrollableTabView>
       </View>
       
-      <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
+      <TouchableOpacity>
           <View style={styles.etc_button}>
             <Text style={styles.etc_text}>
               더 보기

@@ -89,20 +89,6 @@ export const home = () => {
 export const category = ({navigation}) => {
   return (
     <Container>
-      <TouchableOpacity style={styles.etc_button} onPress= {() => navigation.navigate('Tier_system')}>
-      <Text style={styles.etc_content}>Tier System</Text>
-
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.etc_button}>
-        <Text style={styles.etc_content}>Buy/Sell Timing</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.etc_button}>
-      <Text style={styles.etc_content}>Portfolio Analysis</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.etc_button}>
-      <Text style={styles.etc_content}>Others</Text>
-    </TouchableOpacity>
-
     </Container>
   );
 };
@@ -120,42 +106,10 @@ export const market = () => {
 };
 
 
-
-
-export const etc = () => {
+export const etc = ({navigation}) => {
   return (
     <SafeAreaView>
-      
-      <View style={styles.top_banner}>
-      <Text style={styles.top_banner_text}>더보기</Text>
-      <TouchableOpacity style={{ width: 24, position:'absolute'}}>
-     
-     <Image
-          style={{ marginLeft: 16, marginTop: 16, marginRight: 16,
-            height: 24, width: 24,}}
-          source={require('../image/outline_close_black_48dp.png')}
-        />
-        </TouchableOpacity>
-        
-        </View>
-      
 
-
-    <TouchableOpacity style={styles.etc_button}>
-      <Text style={styles.etc_content}>공지사항</Text>
-
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.etc_button}>
-        <Text style={styles.etc_content}>자주하는 질문</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.etc_button}>
-      <Text style={styles.etc_content}>계정 관리</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.etc_button}>
-      <Text style={styles.etc_content}>로그아웃</Text>
-    </TouchableOpacity>
-    
-    
   </SafeAreaView>
   );
 };

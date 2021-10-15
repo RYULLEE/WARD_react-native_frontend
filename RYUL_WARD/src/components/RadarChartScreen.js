@@ -6,9 +6,7 @@ import {
   View,
   processColor
 } from 'react-native';
-import update from 'immutability-helper';
 
-import {RadarChart} from 'react-native-charts-wrapper';
 
 
 class RadarChartScreen extends React.Component {

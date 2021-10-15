@@ -173,7 +173,11 @@ const styles = StyleSheet.create({
     backgroundColor:'red',
     //alignItems:'center',
     //justifyContent:'center',
-    marginTop: -20,
+    marginTop: -10,
+  },
+  scroll_container:{
+    height:wp('100%')/375*180+40,
+    
   },
   hide_box1 : {
     height: 21,
@@ -306,6 +310,8 @@ const Algorithm = ({ navigation }) => {
           />
         <Text style={styles.explain_text2}>시장 평균</Text>
         </View>
+
+        <View style={styles.scroll_container}>
         <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
             tabBarTextStyle={styles.tabBarTextStyle}
           >
@@ -317,7 +323,7 @@ const Algorithm = ({ navigation }) => {
 
             <Radar_chart tabLabel={'최근 12개월'}/>
         </ScrollableTabView>
-        
+        </View>
                
         <Text style={styles.subtitle}>종목 티어 표</Text>
         <View style={styles.row_tier_container}>

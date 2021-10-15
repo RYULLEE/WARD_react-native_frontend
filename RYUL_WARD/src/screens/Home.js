@@ -249,7 +249,7 @@ const Home = ({ navigation }) => {
         <Text style={styles.subtitle_2}>최근 본 알고리즘</Text>
 
         <ScrollView horizontal={true} style={styles.rowcontatiner}>
-          <TouchableOpacity style={styles.al_button_1} >
+          <TouchableOpacity style={styles.al_button_1} onPress= {() => navigation.navigate('ALGORITHM')} >
             <Image
               style={{ height: 128, width: 96, borderRadius: 5, }}
               source={require('../image/al_1.png')}

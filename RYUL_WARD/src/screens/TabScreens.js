@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import { Button, useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, TextInput, ScrollView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Tier_system from './Tier_system';
 
 const Container = styled.View`
   flex: 1;
@@ -84,10 +86,10 @@ export const home = () => {
   );
 };
 
-export const category = () => {
+export const category = ({navigation}) => {
   return (
     <Container>
-      <TouchableOpacity style={styles.etc_button}>
+      <TouchableOpacity style={styles.etc_button} onPress= {() => navigation.navigate('Tier_system')}>
       <Text style={styles.etc_content}>Tier System</Text>
 
     </TouchableOpacity>

@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import { StatusBar, Image } from 'react-native';
+import AppLoading from 'expo-app-loading';
+import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 //import MainStack from './navigations/MainStack';
 import TabNavigation from './navigations/Tab';
@@ -12,8 +16,20 @@ import {
   NotoSansKR_900Black 
 } from '@expo-google-fonts/noto-sans-kr'
 import {useFonts} from 'expo-font';
-import AppLoading from 'expo-app-loading';
 import { LogBox } from "react-native";
+import { ThemeProvider } from 'styled-components/native';
+import { theme } from './theme';
+import { images } from './utils/images';
+
+const cacheImages = images => {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+};
 
 console.disableYellowBox = true;
 LogBox.ignoreLogs(['Warning: ...']);

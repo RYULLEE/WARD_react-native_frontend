@@ -12,4 +12,5 @@ const colors = {
     text: colors.black,
     errorText: colors.red,
     empty: colors.grey_1,
+    imageBackground: colors.grey_0,
   };

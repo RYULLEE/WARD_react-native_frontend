@@ -20,6 +20,8 @@ import { LogBox } from "react-native";
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import { images } from './utils/images';
+import { UserProvider } from './contexts';
+
 
 const cacheImages = images => {
   return images.map(image => {
@@ -64,9 +66,12 @@ const App = () => {
   }
 
   return (
+    <UserProvider>
     <NavigationContainer>
       <TabNavigation />
     </NavigationContainer>
+    </UserProvider>
+    
   );
 };
 

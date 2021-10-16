@@ -4,23 +4,25 @@ import PropTypes from 'prop-types';
 
 const Container = styled.View`
   flex-direction: column;
-  width: 100%;
-  margin: 10px 0;
+  width: 92%;
+  margin: 0 0;
 `;
 const Label = styled.Text`
+  fontFamily: NotoSansKR_400Regular;
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: -16px;
   
 `;
+
 const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
   placeholderTextColor: theme.inputPlaceholder,
 }))`
-  padding: 20px 10px;
+  padding: 10px 0px;
   font-size: 16px;
-  border: 1px solid
-    ${({ theme, isFocused }) => (isFocused ? theme.text : theme.inputBorder)};
-  border-radius: 4px;
+  border-bottom-color: black;
+  border-bottom-width: 2px;
+  
 `;
 
 const Input = forwardRef(

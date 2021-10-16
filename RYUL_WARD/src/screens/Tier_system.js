@@ -131,7 +131,7 @@ const Page_1=({Home, CATEGORY}) => {
 
       <View style={styles.tier_bigcontainer}>
         <View style={styles.tier_rowcontainer}>
-        <TouchableOpacity onPress= {() => navigation.navigate('CATEGORY')}>
+        <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
           <Image
             style={{height:wp('100%')/375*109 , width: wp('100%')/375*109, borderRadius : 10,}}
             source={require('../image/top_1.png')}
@@ -139,7 +139,7 @@ const Page_1=({Home, CATEGORY}) => {
           <Text style={styles.top10text_1}>WARD Timer</Text>
           <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
           <Image
             style={{height:wp('100%')/375*109 , width: wp('100%')/375*109, borderRadius : 10,}}
             source={require('../image/top_2.png')}
@@ -147,7 +147,7 @@ const Page_1=({Home, CATEGORY}) => {
           <Text style={styles.top10text_1}>WARD Timer</Text>
           <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
           <Image
             style={{height:wp('100%')/375*109 , width: wp('100%')/375*109, borderRadius : 10,}}
             source={require('../image/top_3.png')}
@@ -223,7 +223,7 @@ const Tier_system = ({ navigation }) => {
     return (
       <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
-          <TouchableOpacity onPress= {() => navigation.navigate('CATEGORY')}>
+          <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
           <Image  style={{
             height:wp('100%')/375*200, width: wp('100%'),}}
             source={require('../image/tier_bigpicture.png')}

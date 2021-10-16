@@ -37,6 +37,13 @@ const CategoryStack = () => {
             //headerStyle: { height : 60},
             }}/>
             
+            <Stack2.Screen name='ALGORITHM' component={Algorithm} options={{ title: '' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>
+            
 
 
         </Stack2.Navigator>

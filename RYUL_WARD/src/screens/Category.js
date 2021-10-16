@@ -142,7 +142,7 @@ const Category = ({navigation}) => {
 
         <ScrollView horizontal={true} style={styles.top10rowcontatiner}>
           <View style={styles.top10smallcontainer}>
-          <TouchableOpacity>
+          <TouchableOpacity  onPress= {() => navigation.navigate('ALGORITHM')}>
             <Image
               style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
               source={require('../image/top_1.png')}

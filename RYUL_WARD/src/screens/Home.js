@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{Component, useLayoutEffect} from 'react';
 import { Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
@@ -12,6 +12,8 @@ import { SliderBox } from 'react-native-image-slider-box';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import Ranking from '../components/ranking';
 import { NavigationContainer } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const width = Dimensions.get('window').width;
 
@@ -219,9 +221,26 @@ const ranking_list = styled.View`
 
 `;
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation,route }) => {
 
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackTitleVisible: false,
+      headerTintColor: 'black',
+      
+      headerRight: ({ tintColor }) => (
+        
+        <Ionicons
+          name="search"
+          size={25}
+          style={{ marginRight: 20 }}
+          color='gray'
+          onPress= {() => navigation.navigate('ALGORITHM')}
+        />
+      ),
+    });
+  }, []);
+  
   return (
       <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>

@@ -12,6 +12,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import Ranking from '../components/ranking';
 import { NavigationContainer } from '@react-navigation/native';
+import {images} from '../utils/images'
 
 const width = Dimensions.get('window').width;
 
@@ -226,9 +227,9 @@ const Home = ({ navigation }) => {
       <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
         <SliderBox images={[
-          require('../image/big_picture.png'),
-          require('../image/big_picture2.png'),
-          require('../image/big_picture3.png')
+          images.Home_banner_1,
+          images.Home_banner_2,
+          images.Home_banner_3,
         ]}
 
           autoplay

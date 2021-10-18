@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import { Button, useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, TextInput, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Tier_system from './Tier_system';
+import {firestore} from '../utils/firebase'
 
 const Container = styled.View`
   flex: 1;
@@ -86,14 +87,30 @@ export const home = () => {
   );
 };
 
+
 export const category = ({navigation}) => {
   return (
     <Container>
     </Container>
   );
 };
+class test {
+  constructor (name, age) {
+    this.name =  name;
+    this.age = age;
+  }
+  toString(){
+    return this.name + ' is ' + this.age;
+  }
+}
+
 
 export const market = () => {
+  firestore.collection("tier_system").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+    });
+  });
   return (
     <View>
       <TextInput

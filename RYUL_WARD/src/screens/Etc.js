@@ -55,14 +55,14 @@ export const etc = ({navigation}) => {
       <SafeAreaView>     
         <ScrollView style={{backgroundColor:'#ffffff',}}>
   
-      <TouchableOpacity style={styles.etc_button}>
+      <TouchableOpacity  onPress= {() => navigation.navigate('Notice')} style={styles.etc_button}>
         <Text style={styles.etc_content}>공지사항</Text>
   
       </TouchableOpacity>
-      <TouchableOpacity style={styles.etc_button}>
+      <TouchableOpacity onPress= {() => navigation.navigate('Question')} style={styles.etc_button}>
           <Text style={styles.etc_content}>자주하는 질문</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.etc_button}>
+      <TouchableOpacity onPress= {() => navigation.navigate('User_admin')} style={styles.etc_button}>
         <Text style={styles.etc_content}>계정 관리</Text>
       </TouchableOpacity>
       

@@ -12,12 +12,9 @@ import { SliderBox } from 'react-native-image-slider-box';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import Ranking from '../components/ranking';
 import { NavigationContainer } from '@react-navigation/native';
-<<<<<<< HEAD
 import {images} from '../utils/images'
-=======
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
->>>>>>> 80be41ed395d211c305e2cf2c505d81797d2bb5f
 
 const width = Dimensions.get('window').width;
 
@@ -239,7 +236,7 @@ const Home = ({ navigation,route }) => {
           size={25}
           style={{ marginRight: 20 }}
           color='gray'
-          onPress= {() => navigation.navigate('ALGORITHM')}
+          onPress= {() => navigation.navigate('Search')}
         />
       ),
     });

@@ -117,7 +117,7 @@ const Category = ({navigation, route}) => {
           size={25}
           style={{ marginRight: 20 }}
           color='gray'
-          onPress= {() => navigation.navigate('ALGORITHM')}
+          onPress= {() => navigation.navigate('Search')}
         />
       ),
     });

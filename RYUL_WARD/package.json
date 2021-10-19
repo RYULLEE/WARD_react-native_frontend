@@ -9,10 +9,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-kr": "^0.2.0",
-<<<<<<< HEAD
-=======
     "@expo/vector-icons": "^12.0.5",
->>>>>>> 80be41ed395d211c305e2cf2c505d81797d2bb5f
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "0.1.10",
@@ -25,11 +22,13 @@
     "expo-font": "^9.2.1",
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
+    "lodash.filter": "^4.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-charts-wrapper": "^0.5.7",
     "react-native-check-box": "^2.1.7",
+    "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-image-slider-box": "^1.1.8",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",

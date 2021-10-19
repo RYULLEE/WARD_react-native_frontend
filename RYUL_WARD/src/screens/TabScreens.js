@@ -106,11 +106,7 @@ class test {
 
 
 export const market = () => {
-  firestore.collection("tier_system").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-    });
-  });
+
   return (
     <View>
       <TextInput

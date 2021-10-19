@@ -31,7 +31,7 @@ const DATA = [
     },
     {
       id: "2",
-      title: "이률 이률",
+      title: "WARD Tier System 2",
     },
     {
       id: "3",
@@ -39,7 +39,7 @@ const DATA = [
     },
     {
       id: "4",
-      title: "이두호 이두호",
+      title: "WARD Tier System 4",
     },
     {
       id: "5",
@@ -47,7 +47,7 @@ const DATA = [
     },
     {
       id: "6",
-      title: "이찬규 이찬규",
+      title: "WARD Tier System 6",
     },
     {
       id: "7",
@@ -71,7 +71,7 @@ const DATA = [
     },
     {
       id: "12",
-      title: "삼성전자",
+      title: "WARD Tier System 12",
     },
   ];
     
@@ -87,9 +87,7 @@ const DATA = [
     
   const renderItem = ({ item }) => <Item title={item.title} />;
 
-  let search_text_under='인기 검색';
-  let search_text_under_height=60;
-  let show_okay = true;
+  
   class Search_Bar extends Component {
     constructor(props) {
       super(props);
@@ -109,29 +107,24 @@ const DATA = [
         return item_data.indexOf(text_data) > -1;
       });
       this.setState({ data: updatedData, searchValue: text });
-      if(text) {
-          search_text_under_height=0;
-          search_text_under='';
-          show_okay=false;
-      }
-      else {
-          search_text_under_height=600;
-          search_text_under='인기 검색';
-          show_okay=true;
-      }
     };
     
     render() {
-    
-     
       return (
-        <View>
-          
+        <View style={styles.large_container}>
+          <View style={styles.top_row_container}>
+          <Ionicons
+            name="arrow-back-outline"
+            size={25}
+            style={{ marginRight: 20 }}
+            color='black'
+            onPress= {() => this.props.navigation.navigate('Home')}
+        />
           <SearchBar
             placeholder="알고리즘 검색"
             placeholderTextColor = '#C4C4C4'
             //inputStyle={{backgroundColor: 'white',borderColor:'white', borderWidth : 0,}}
-            containerStyle={{backgroundColor: 'white',marginLeft:60, borderColor:'white', width:wp('100%')/375*310,borderBottomColor:'white',borderTopColor:'white', borderWidth : 0, borderRadius: 5}}
+            containerStyle={{backgroundColor: 'white',borderColor:'white', width:wp('100%')/375*310,borderBottomColor:'white',borderTopColor:'white', borderWidth : 0, borderRadius: 5}}
             inputContainerStyle={{backgroundColor: 'white',borderColor:'white', borderWidth: 0, borderRadius: 5}}
             round
             searchIcon = {false}
@@ -142,9 +135,8 @@ const DATA = [
             
           />
           
-            <View>
-             {show_okay && <Text style={styles.title_text} >{search_text_under}</Text>}
-             </View>
+        </View>
+        <Text style={styles.title_text}>인기 검색</Text>
           <FlatList
             data={this.state.data}
             renderItem={renderItem}
@@ -157,7 +149,6 @@ const DATA = [
     }
   }
 
-
 const styles = StyleSheet.create({
     
     large_container: {
@@ -166,25 +157,15 @@ const styles = StyleSheet.create({
         //height: wp('100%')/375*50,
         
       },
-    hide_container: {
-        height: search_text_under_height,
-        backgroundColor: 'red',
-    },
-    top_container : {
+    top_row_container : {
         width: wp('100%'),
+        flexDirection: 'row',
         //height: wp('100%')/375*50,
-        //justifyContent: 'center',
-        //alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         //backgroundColor: 'red',
         borderBottomColor: '#E9E9E9',
         borderBottomWidth: 1,
-        marginTop: Platform.OS === 'ios' ? 0 : 20,
-    },
-    back_container : {
-        position: 'absolute',
-        marginLeft: 30,
-        marginTop: 20,
-
     },
     item: {
         backgroundColor: "#ffffff",
@@ -213,7 +194,7 @@ const styles = StyleSheet.create({
       fontSize : 16,
       //lineHeight: 30,
       includeFontPadding: false,
-      marginTop:20,
+      marginTop:30,
       color: '#6F7985',
       marginLeft: 31,
       marginBottom: 15,
@@ -232,33 +213,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
-const Search = ({ navigation }) => {
-
-  return (
-      <SafeAreaView>
-      <ScrollView style={{backgroundColor:'#ffffff'}}>
-          
-          <View style={styles.top_container}>
-         
-          <Search_Bar/>
-
-          <View style={styles.back_container}>
-            <Ionicons
-                name="arrow-back-outline"
-                size={25}
-                style={{ marginRight: 20 }}
-                color='black'
-                onPress= {() => navigation.navigate('Home')}
-            />
-          </View>
-        </View>
-
-         
-      </ScrollView>
-      </SafeAreaView>
-  );
-};
-
-export default Search;
-
+export default Search_Bar;

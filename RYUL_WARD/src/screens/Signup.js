@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect} from 'react';
 import styled from 'styled-components/native';
-import { Alert, TouchableOpacity, Text, StyleSheet,  Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { View, Alert, TouchableOpacity, Text, StyleSheet,  Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Input} from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhiteSpace } from '../utils/common';
 import { signup } from '../utils/firebase';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useNavigation } from '@react-navigation/native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 const Container = styled.View`
   flex:1;
@@ -30,18 +31,32 @@ const styles = StyleSheet.create({
   signup_button: {
     marginTop: 40,
     width: '92%',
-    backgroundColor: '#808080',
+    height: 40,
+    justifyContent : 'center',
     marginBottom: 16,
+    backgroundColor: '#000000',
+    borderRadius : 5,
   },
   signup_text: {
     fontFamily: 'NotoSansKR_500Medium',
+    includeFontPadding: false,
     fontSize: 16,
     textAlign: 'center',
     color: '#FFFFFF',
-    backgroundColor: '#000000',
+    
   },
   spinnerTextStyle: {
     color: '#FFF',
+  },
+  each_container : {
+    marginBottom: 30,
+    width : wp('100')-32,
+    //justifyContent: 'center',
+    marginLeft : 16,
+    marginRight: 16,
+    //backgroundColor : 'red',
+    borderBottomWidth : 2,
+    
   },
 });
 
@@ -112,8 +127,10 @@ const Signup = ({Login}) => {
     />
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <Container>
+      
+      <View style={styles.each_container}>
       <Input
-        label="Name"
+        //label="Name"
         value={name}
         onChangeText={text => setName(text)}
         onSubmitEditing={() => {setName(name.trim());
@@ -122,18 +139,24 @@ const Signup = ({Login}) => {
         placeholder="Name"
         returnKeyType="next"
        />
+       </View>
+
+       <View style={styles.each_container}>
       <Input
         ref={emailRef}
-        label="Email"
+        //label="Email"
         value={email}
         onChangeText={text => setEmail(removeWhiteSpace(text))}
         onSubmitEditing={() => passwordRef.current.focus()}
         placeholder="Email"
         returnKeyType="next"
       />
+      </View>
+
+      <View style={styles.each_container}>
       <Input
         ref={passwordRef}
-        label="Password"
+        //label="Password"
         value={password}
         onChangeText={text => setPassword(removeWhiteSpace(text))}
         onSubmitEditing={() => passwordConfirmRef.current.focus()}
@@ -141,16 +164,20 @@ const Signup = ({Login}) => {
         returnKeyType="next"
         isPassword
       />
+      </View>
+
+      <View style={styles.each_container}>
        <Input
         ref={passwordConfirmRef}
-        label="Password Confirm"
+        //label="Password Confirm"
         value={passwordConfirm}
         onChangeText={text => setPasswordConfirm(removeWhiteSpace(text))}
         onSubmitEditing={_handleSignupButtonPress}
-        placeholder="Password"
+        placeholder="Password_Confirm"
         returnKeyType="done"
         isPassword
       />
+      </View>
       <ErrorText>{errorMessage}</ErrorText>
 
       <TouchableOpacity style={styles.signup_button} onPress= {_handleSignupButtonPress}>

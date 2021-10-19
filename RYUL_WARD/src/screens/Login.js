@@ -9,12 +9,13 @@ import { validateEmail, removeWhiteSpace } from '../utils/common'
 import { login } from '../utils/firebase'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { UserContext } from '../contexts';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 
 
 const Container = styled.View`
   flex:1;
-  padding: 40px 0px;
+  padding: 20px 0px;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
@@ -23,6 +24,7 @@ const ErrorText = styled.Text`
   align-items:flex-start;
   width: 100%;
   fontFamily: NotoSansKR_400Regular;
+  includeFontPadding: false;
   margin-bottom: 10px;
   margin-left: 32px;
 
@@ -32,9 +34,14 @@ const styles = StyleSheet.create({
   
   login_button: {
     marginTop: 50,
-    width: '92%',
-    backgroundColor: '#808080',
+    width:  widthPercentageToDP('100%')-32,
+    backgroundColor: '#000000',
+    justifyContent: 'center',
     marginBottom: 16,
+    height: 40,
+    borderRadius : 5,
+    marginLeft : 16,
+    marginRight : 16,
   },
   signup_button: {
     flexDirection: 'row',
@@ -43,18 +50,22 @@ const styles = StyleSheet.create({
   },
   login_text: {
     fontFamily: 'NotoSansKR_500Medium',
+    includeFontPadding: false,
+    lineHeight: 20,
     fontSize: 16,
     textAlign: 'center',
     color: '#FFFFFF',
-    backgroundColor: '#000000',
+    
   },
   ment: {
-    textAlign: 'left',
-    alignSelf: 'stretch',
+    //textAlign: 'left',
+    //alignSelf: 'stretch',
     fontFamily: 'NotoSansKR_700Bold',
+    includeFontPadding: false,
+    lineHeight: 20,
     fontSize: 18,
     color: '#000000',
-    marginTop: -20,
+    marginTop: 20,
     marginLeft: 16,
     //backgroundColor: '#000000',
   },
@@ -62,7 +73,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '15%',
     //marginTop: 50,
-    marginBottom: 10,
+    marginBottom: 30,
     justifyContent: 'center',
     //backgroundColor: '#808080',
   },
@@ -71,6 +82,8 @@ const styles = StyleSheet.create({
   },
   ask_ment: {
     fontFamily: 'NotoSansKR_400Regular',
+    includeFontPadding: false,
+    lineHeight: 20,
     fontSize: 14,
     color: '#000000',
     
@@ -78,12 +91,23 @@ const styles = StyleSheet.create({
   signup_ment: {
     textDecorationLine: 'underline',
     fontFamily: 'NotoSansKR_400Regular',
+    includeFontPadding: false,
+    lineHeight: 20,
     fontSize: 14,
     color: '#000000',
   },
   ment_button:{
     margin: 10,
   },
+  input_container : {
+    width : widthPercentageToDP('100%')-32,
+    height: 30,
+    justifyContent : 'center',
+    //backgroundColor : 'red',
+    borderBottomWidth : 2,
+    marginTop : 10,
+    marginBottom : 10,
+  }
 });
 
 const Login = ({Signup}) => {
@@ -142,18 +166,24 @@ const Login = ({Signup}) => {
       <Text style={styles.ment}>안녕하세요.</Text>
       <Text style={styles.ment}>모두를 위한 투자 알고리즘, 와드입니다.</Text>
       </View>
+      
+      <View style={styles.input_container}>
       <Input
-        label = "Email"
+        //label = "Email"
         value = {email}
         onChangeText={_handleEmailChange}
         onSubmitEditing={()=>passwordRef.current.focus()}
         placeholder = "Email"
         returnKeyType = "next"
       />
+      </View> 
       <ErrorText>{errorMessage}</ErrorText>
+      
+
+      <View style={styles.input_container}>
       <Input
         ref={passwordRef}
-        label = "Password"
+        //label = "Password"
         value = {password}
         onChangeText={_handlePasswordChange}
         onSubmitEditing={()=>{}}
@@ -161,6 +191,8 @@ const Login = ({Signup}) => {
         returnKeyType = "done"
         isPassword
       />
+      </View>
+      
       <TouchableOpacity style={styles.login_button} onPress= {_handleLogin}>
         <Text style={styles.login_text}>로그인</Text>
       </TouchableOpacity>

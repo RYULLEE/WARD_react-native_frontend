@@ -9,6 +9,8 @@ const Container = styled.View`
 `;
 const Label = styled.Text`
   fontFamily: NotoSansKR_400Regular;
+  includeFontPadding: false;
+  line-height: 30;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: -16px;
@@ -18,10 +20,9 @@ const Label = styled.Text`
 const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
   placeholderTextColor: theme.inputPlaceholder,
 }))`
-  padding: 10px 0px;
+  padding: 5px 0px;
   font-size: 16px;
-  border-bottom-color: black;
-  border-bottom-width: 2px;
+  
   
 `;
 

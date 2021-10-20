@@ -157,7 +157,7 @@ const Category = ({navigation, route}) => {
 
         <ScrollView horizontal={true} style={styles.top10rowcontatiner}>
           <View style={styles.top10smallcontainer}>
-          <TouchableOpacity  onPress= {() => navigation.navigate('ALGORITHM')}>
+          <TouchableOpacity  onPress= {() => navigation.navigate('PORTFOLIO')}>
             <Image
               style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
               source={require('../image/top_1.png')}
@@ -168,13 +168,13 @@ const Category = ({navigation, route}) => {
           </View>
 
           <View style={styles.top10smallcontainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress= {() => navigation.navigate('PORTFOLIO')}>
             <Image
               style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
               source={require('../image/top_2.png')}
             />
             </TouchableOpacity>
-            <Text style={styles.top10text_1}>WARD Timer</Text>
+            <Text style={styles.top10text_1}>WARD Portfolio</Text>
             <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
           </View>
 

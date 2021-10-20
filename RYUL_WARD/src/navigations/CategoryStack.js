@@ -5,6 +5,7 @@ import { home, category, market, etc } from '../screens/TabScreens';
 import Tier_system from '../screens/Tier_system';
 import TabNavigation from './Tab';
 import Algorithm from '../screens/Algorithm';
+import Portfolio from '../screens/Portfolio';
 
 
 const Stack2 = createStackNavigator();
@@ -38,6 +39,13 @@ const CategoryStack = () => {
             }}/>
             
             <Stack2.Screen name='ALGORITHM' component={Algorithm} options={{ title: '' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>
+
+            <Stack2.Screen name='PORTFOLIO' component={Portfolio} options={{ title: '' }} screenOptions={{
             headerTitleAlign: 'center',
             headerBackTitleVisible: false,
             

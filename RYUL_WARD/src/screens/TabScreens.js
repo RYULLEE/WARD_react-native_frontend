@@ -113,7 +113,7 @@ export const market = () => {
         placeholder="Course Goal!"
         style={{ borderColor: "black",                                                                                                                                                                                                                                                                                                                                                 borderWidth: 1, padding: 10 }}
       />
-        <Button title="ADD" />
+        <Button title="ADddddddddD" />
     </View>
   );
 };

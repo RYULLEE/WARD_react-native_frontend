@@ -11,6 +11,8 @@ import TabBarComponent from '../components/TabBarComponent';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AuthStack from './AuthStack';
+import Market from '../screens/Market';
+import MarketStack from './MarketStack';
 
 const TabIcon = ({ name, size, color }) => {
     return <MaterialCommunityIcons name={name} size={size} color={color} />;
@@ -26,7 +28,7 @@ const TabNavigation = () => {
         screenOptions={{tabBarStyle:{backgroundColor: '#F0F0F0' }, position: 'absolute',tabBarActiveTintColor: '#000000', headerShown:false,tabBarinactiveTintColor: '#858383'}}>
             <Tab.Screen name='홈' component={MainStack}  options={{keyboardHidesTabBar: true, tabBarIcon: props => TabIcon({...props, name:'home'}),}}/>
             <Tab.Screen name='카테고리' component={CategoryStack} options={{tabBarIcon: props => TabIcon({...props, name:'format-list-bulleted'}),}}/>
-            <Tab.Screen name='다운로드 마켓' component={market} options={{tabBarIcon: props => TabIcon({...props, name:'cart'}),}}/>
+            <Tab.Screen name='다운로드 마켓' component={MarketStack} options={{tabBarIcon: props => TabIcon({...props, name:'cart'}),}}/>
             <Tab.Screen name='더보기' component={EtcStack} options={{tabBarIcon: props => TabIcon({...props, name:'dots-horizontal'}),}}
             //user?.uid && user?.email ? EtcStack : AuthStack
             />

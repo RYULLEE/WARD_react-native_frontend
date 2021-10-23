@@ -5,6 +5,7 @@ import Tier_system from '../screens/Tier_system';
 import TabNavigation from './Tab';
 import Algorithm from '../screens/Algorithm';
 import Ranking from '../components/ranking';
+import Search from '../screens/Search';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,10 @@ const MainStack = () => {
                 headerBackTitleVisible: false,
                 headerTitleStyle : { fontSize : 20,fontFamily: 'NotoSansKR_400Regular'},
                 //headerStyle: { height : 60},
-                }}/>
+                
+                }}
+                
+                />
 
             <Stack.Screen name='RANKING' component={Ranking}/>
 
@@ -36,6 +40,13 @@ const MainStack = () => {
             
             //headerStyle: { height : 60},
             }}/>
+
+            <Stack.Screen name='Search' component={Search} options={{ title: '', headerShown: false, }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>    
             
         </Stack.Navigator>
     );

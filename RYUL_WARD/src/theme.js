@@ -13,4 +13,6 @@ const colors = {
     errorText: colors.red,
     empty: colors.grey_1,
     imageBackground: colors.grey_0,
+    spinnerBackground: colors.black,
+    spinnerIndicator: colors.white,
   };

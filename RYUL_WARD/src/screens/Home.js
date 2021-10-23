@@ -1,17 +1,16 @@
-import React,{Component} from 'react';
+import React,{Component, useLayoutEffect} from 'react';
 import { Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SliderBox } from 'react-native-image-slider-box';
-//import TabViewExample from '../navigations/home_slide_tab';
-//import ScrollableTabView,{ ScrollableTabBar }  from 'react-native-scrollable-tab-view';
-//import { render } from 'react-router-dom';
-//import Tabs from '../navigations/home_slide_tab';
-//import { TabView, SceneMap } from 'react-native-tab-view';
+
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import Ranking from '../components/ranking';
 import { NavigationContainer } from '@react-navigation/native';
+import {images} from '../utils/images'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const width = Dimensions.get('window').width;
 
@@ -219,16 +218,33 @@ const ranking_list = styled.View`
 
 `;
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation,route }) => {
 
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackTitleVisible: false,
+      headerTintColor: 'black',
+      
+      headerRight: ({ tintColor }) => (
+        
+        <Ionicons
+          name="search"
+          size={25}
+          style={{ marginRight: 20 }}
+          color='gray'
+          onPress= {() => navigation.navigate('Search')}
+        />
+      ),
+    });
+  }, []);
+  
   return (
       <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
         <SliderBox images={[
-          require('../image/big_picture.png'),
-          require('../image/big_picture2.png'),
-          require('../image/big_picture3.png')
+          images.Home_banner_1,
+          images.Home_banner_2,
+          images.Home_banner_3,
         ]}
 
           autoplay

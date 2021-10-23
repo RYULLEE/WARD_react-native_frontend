@@ -5,16 +5,17 @@ import { home, category, market, etc } from '../screens/TabScreens';
 import Tier_system from '../screens/Tier_system';
 import TabNavigation from './Tab';
 import Algorithm from '../screens/Algorithm';
-import Portfolio from '../screens/Portfolio';
+import User_admin from '../screens/User_admin';
+import User_admin_component_1 from '../screens/Uer_admin_component_1';
+import User_admin_component_2 from '../screens/User_admin_component_2';
 
+const Stack6 = createStackNavigator();
 
-const Stack2 = createStackNavigator();
-
-const CategoryStack = () => {
+const User_adminStack = () => {
     
     return(
 
-        <Stack2.Navigator initialRouteName='CATEGORY' screenOptions={{
+        <Stack6.Navigator initialRouteName='User_admin' screenOptions={{
             headerTitleAlign: 'center',
             
             headerBackTitleVisible: false,
@@ -22,7 +23,7 @@ const CategoryStack = () => {
             //headerStyle: { height : 60},
             }}> 
 
-            <Stack2.Screen name='CATEGORY' component={Category} options={{ title: 'W A R D' }} screenOptions={{
+            <Stack6.Screen name='User_admin' component={User_admin}  options={{ title: '계정 관리', }} screenOptions={{
             headerTitleAlign: 'center',
             
             headerBackTitleVisible: false,
@@ -30,35 +31,28 @@ const CategoryStack = () => {
             //headerStyle: { height : 60},
             }}/>
 
-            <Stack2.Screen name='TIER SYSTEM' component={Tier_system} options={{ title: 'T I E R    S Y S T E M' }} screenOptions={{
+            <Stack6.Screen name='User_admin_component_1' component={User_admin_component_1} options={{ title: '이용약관'}} screenOptions={{
             headerTitleAlign: 'center',
-            headerTitle: 'Tier System',
+            
             headerBackTitleVisible: false,
             headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
             //headerStyle: { height : 60},
             }}/>
-            
-            <Stack2.Screen name='ALGORITHM' component={Algorithm} options={{ title: '' }} screenOptions={{
+
+            <Stack6.Screen name='User_admin_component_2' component={User_admin_component_2} options={{ title: '이용약관'}} screenOptions={{
             headerTitleAlign: 'center',
-            headerBackTitleVisible: false,
             
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
             //headerStyle: { height : 60},
             }}/>
 
-            <Stack2.Screen name='PORTFOLIO' component={Portfolio} options={{ title: '' }} screenOptions={{
-            headerTitleAlign: 'center',
-            headerBackTitleVisible: false,
-            
-            //headerStyle: { height : 60},
-            }}/>
-            
 
-
-        </Stack2.Navigator>
+        </Stack6.Navigator>
 
     );
 
 
 };
 
-export default CategoryStack;
+export default User_adminStack;

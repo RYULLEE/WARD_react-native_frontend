@@ -1,90 +1,17 @@
-import React,{Component} from 'react';
+import React,{Component, useState, useEffect} from 'react';
 import { AppRegistry, processColor, Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { SliderBox } from 'react-native-image-slider-box';
-//import TabViewExample from '../navigations/home_slide_tab';
-//import ScrollableTabView,{ ScrollableTabBar }  from 'react-native-scrollable-tab-view';
-//import { render } from 'react-router-dom';
-//import Tabs from '../navigations/home_slide_tab';
-//import { TabView, SceneMap } from 'react-native-tab-view';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
 import Ranking from '../components/ranking';
 import { NavigationContainer } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
-//import page_1 from '../components/tier_component';
 import { useNavigation } from '@react-navigation/native';
 import Plotly from 'react-native-plotly';
-//import update from 'immutability-helper';
-//import {RadarChart} from 'react-native-charts-wrapper';
 import RadarChartScreen from '../components/RadarChartScreen';
-
-const Al_options = ["5일", "15일", "30일"];
-
-const data = [ 
-  {
-  type: 'scatterpolar', 
-  r: [80, 90, 75,80], 
-  theta: ['적즁률','수익률','정밀도','적즁률'], 
-  fill: 'toself', 
-  name: 'WARD',
-  line: {
-    color: '#E99314',
-  },
-  },
-  {
-    type: 'scatterpolar', 
-    r: [30, 40, 50,30], 
-    theta: ['적즁률','수익률','정밀도','적즁률'], 
-    fill: 'toself', 
-    name: '시장 평균', 
-    line: {
-      color: 'gray',
-    },
-    }
-];
-
-const layout = { 
-  height:wp('100%')/375*250,
-  l: 0, r: 0, b: 0, t: 0, pad: 0,
-  margin:{
-    l: 0,
-      r: 0,
-      t: 40,
-      d: 0,
-  },
-  polar: {
-    radialaxis: { 
-      visible: true, 
-      range: [0, 100],
-      showticklabels: false,  
-      showline: false,
-      ticklen: 0,
-    },
-    angularaxis: { 
-      rotation: 210, 
-      ticklen: 0,
-      tickfont: { 
-        color: '#000000',
-        size: 13,
-        fontFamily: 'NotoSansKR_500Medium',
-      },
-    },
-
-  },
-  showlegend: false,
-  autosize: true,
-  staticPlot: true,
-  xaxis: {
-    uirevision: 'time',
- },
- yaxis: {
-    uirevision: 'time',
- },
-  
-};
-
+import { DB } from '../utils/firebase';
 
 const styles = StyleSheet.create({
 
@@ -239,6 +166,70 @@ const styles = StyleSheet.create({
  
 });
 
+const Al_options = ["단기", "중기", "장기"];
+
+const data = [ 
+  {
+  type: 'scatterpolar', 
+  r: [80, 90, 75,80], 
+  theta: ['적즁률','수익률','정밀도','적즁률'], 
+  fill: 'toself', 
+  name: 'WARD',
+  line: {
+    color: '#E99314',
+  },
+  },
+  {
+    type: 'scatterpolar', 
+    r: [30, 40, 50,30], 
+    theta: ['적즁률','수익률','정밀도','적즁률'], 
+    fill: 'toself', 
+    name: '시장 평균', 
+    line: {
+      color: 'gray',
+    },
+    }
+];
+
+const layout = { 
+  height:wp('100%')/375*250,
+  l: 0, r: 0, b: 0, t: 0, pad: 0,
+  margin:{
+    l: 0,
+      r: 0,
+      t: 40,
+      d: 0,
+  },
+  polar: {
+    radialaxis: { 
+      visible: true, 
+      range: [0, 100],
+      showticklabels: false,  
+      showline: false,
+      ticklen: 0,
+    },
+    angularaxis: { 
+      rotation: 210, 
+      ticklen: 0,
+      tickfont: { 
+        color: '#000000',
+        size: 13,
+        fontFamily: 'NotoSansKR_500Medium',
+      },
+    },
+
+  },
+  showlegend: false,
+  autosize: true,
+  staticPlot: true,
+  xaxis: {
+    uirevision: 'time',
+ },
+ yaxis: {
+    uirevision: 'time',
+ },
+  
+};
 const icon=() => {
 
   return (
@@ -261,8 +252,35 @@ const Radar_chart = () => {
     );
 };
 
-const Algorithm = ({ navigation }) => {
+const Item = ({item: {id, name, invest_term, used_data, algo_type}}) => {
+  return(
+    <View style={styles.tier_component_container}>
+            <Image
+              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
+              source={require('../image/tier_component_1_1.png')}
+            />
+            <Text style={styles.tier_component_text}>현대차</Text>
+          </View>
+  );
+};
 
+const Algorithm = ({ navigation }, params) => {
+  console.log(params)
+  const [algo_info, setAlgo_info] = useState([]);
+  useEffect(()=> {
+    const unsubscribe = DB.collection('tier_system')
+      //.doc('')
+      .onSnapshot(snapshot =>{
+        const list =[];
+        snapshot.forEach(doc=>{
+          let obj = doc.data();
+          obj["id"] = doc.id;
+          list.push(obj);
+        });
+        setAlgo_info(list);
+      });
+      return ()=> unsubscribe();
+  }, []);
   return(
     
     <SafeAreaView>
@@ -286,7 +304,7 @@ const Algorithm = ({ navigation }) => {
                 onSelect={(selectedItem, index) => {
                   console.log(selectedItem, index)
                 }}
-                defaultButtonText={'5일'}
+                defaultButtonText={'단기'}
                 buttonStyle={styles.select_box}
                 buttonTextStyle={styles.select_box_text}
                 rowTextStyle={styles.select_box_text_under}
@@ -331,34 +349,14 @@ const Algorithm = ({ navigation }) => {
             style={{height:wp('100%')/375*29 , width: wp('100%')/375*23,}}
             source={require('../image/tier_label_1.png')}
           />
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_1_1.png')}
+          <FlatList 
+            keyExtractor={item => item['id']}
+            data = {algo_info}
+            renderItem = {({item}) => (
+              <Item item = {item} />
+            )}
+            numColumns = {3}
             />
-            <Text style={styles.tier_component_text}>현대차</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_1_2.png')}
-            />
-            <Text style={styles.tier_component_text}>카카오</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_1_3.png')}
-            />
-            <Text style={styles.tier_component_text}>기아</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_1_4.png')}
-            />
-            <Text style={styles.tier_component_text}>셀트리온</Text>
-          </View>
         </View>
 
         <View style={styles.row_tier_container}>

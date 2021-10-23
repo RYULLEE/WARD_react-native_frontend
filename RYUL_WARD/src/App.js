@@ -36,6 +36,7 @@ const cacheImages = images => {
 
 console.disableYellowBox = true;
 LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs([
   "Warning: Calling `getNode()` on the ref of an Animated component is no longer necessary. You can now directly use the ref instead. This method will be removed in a future release., ReactNativeFiberHostComponent",
 ]);

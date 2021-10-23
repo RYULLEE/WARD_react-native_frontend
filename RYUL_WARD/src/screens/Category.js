@@ -157,7 +157,7 @@ const Category = ({navigation, route}) => {
 
         <ScrollView horizontal={true} style={styles.top10rowcontatiner}>
           <View style={styles.top10smallcontainer}>
-          <TouchableOpacity  onPress= {() => navigation.navigate('PORTFOLIO')}>
+          <TouchableOpacity  onPress= {() => navigation.navigate('TIMER')}>
             <Image
               style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
               source={require('../image/top_1.png')}

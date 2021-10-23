@@ -1,16 +1,10 @@
 import React,{Component, useState, useEffect} from 'react';
-import { AppRegistry, processColor, Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
-import styled from 'styled-components/native';
-import { Dimensions, Platfrom, ScrollView } from 'react-native';
+import {  Image, View, Text, SafeAreaView, StyleSheet, FlatList, } from 'react-native';
+import {  ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { SliderBox } from 'react-native-image-slider-box';
-import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
-import Ranking from '../components/ranking';
-import { NavigationContainer } from '@react-navigation/native';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view-forked';
 import SelectDropdown from 'react-native-select-dropdown';
-import { useNavigation } from '@react-navigation/native';
 import Plotly from 'react-native-plotly';
-import RadarChartScreen from '../components/RadarChartScreen';
 import { DB } from '../utils/firebase';
 
 const styles = StyleSheet.create({
@@ -162,34 +156,13 @@ const styles = StyleSheet.create({
     //lineHeight: 20,
     fontSize: 12,
     marginTop: 8,
+    maxWidth: 70, 
+    textAlign: "center"
   },
  
 });
 
 const Al_options = ["단기", "중기", "장기"];
-
-const data = [ 
-  {
-  type: 'scatterpolar', 
-  r: [80, 90, 75,80], 
-  theta: ['적즁률','수익률','정밀도','적즁률'], 
-  fill: 'toself', 
-  name: 'WARD',
-  line: {
-    color: '#E99314',
-  },
-  },
-  {
-    type: 'scatterpolar', 
-    r: [30, 40, 50,30], 
-    theta: ['적즁률','수익률','정밀도','적즁률'], 
-    fill: 'toself', 
-    name: '시장 평균', 
-    line: {
-      color: 'gray',
-    },
-    }
-];
 
 const layout = { 
   height:wp('100%')/375*250,
@@ -230,8 +203,8 @@ const layout = {
  },
   
 };
-const icon=() => {
 
+const icon=() => {
   return (
     <Image  style={{
       height:14, width: 14,}}
@@ -240,47 +213,151 @@ const icon=() => {
   );
 };
 
-const Radar_chart = () => {
 
-    return(
-      <View style={styles.chart_container} >
-          
-      <Plotly  data={data} layout={layout} debug enableFullPlotly />
-      <View style={styles.hide_box1}/>
-      <View style={styles.hide_box2}/>
-    </View>
-    );
-};
-
-const Item = ({item: {id, name, invest_term, used_data, algo_type}}) => {
-  return(
-    <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_1_1.png')}
-            />
-            <Text style={styles.tier_component_text}>현대차</Text>
-          </View>
-  );
-};
-
-const Algorithm = ({ navigation }, params) => {
-  console.log(params)
-  const [algo_info, setAlgo_info] = useState([]);
+const Item = ({item}) => {
+  const prefix = 'https://firebasestorage.googleapis.com/v0/b/ward-1-2bf63.appspot.com/o';
+  let stock_num = item
+  let img_url = `${prefix}/stock_image%2F${stock_num}.png?alt=media`;
+  const [stock_name, setStock_name] = useState([]);
   useEffect(()=> {
-    const unsubscribe = DB.collection('tier_system')
-      //.doc('')
+    const unsubscribe = DB.collection('Market_info')
+      .where("단축코드", "==", stock_num)
       .onSnapshot(snapshot =>{
         const list =[];
         snapshot.forEach(doc=>{
           let obj = doc.data();
           obj["id"] = doc.id;
           list.push(obj);
+          console.log(list[0]["한글 종목약명"]);
         });
-        setAlgo_info(list);
+        setStock_name(list[0]["한글 종목약명"]);
       });
-      return ()=> unsubscribe();
+        return ()=> unsubscribe();
   }, []);
+
+  //console.log(img_url)
+  return(
+    <View style={styles.tier_component_container}>
+            <Image
+              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,
+              borderWidth: 3, 
+              borderColor: "#F08683",
+              marginHorizontal: 12}}
+              source={{uri: img_url}}
+              
+            />
+            <Text style={styles.tier_component_text}>{stock_name}</Text>
+          </View>
+  );
+};
+
+const formatData = (data, numColumns) => {
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+  let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
+  while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
+    data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
+    numberOfElementsLastRow++;
+  }
+  return data;
+}
+
+const Algorithm = ({ route:{params}}) => {
+  console.log(params);
+  const [stock_info_1, setStock_info_1] = useState([]);
+  const [stock_info_2, setStock_info_2] = useState([]);
+  const [stock_info_3, setStock_info_3] = useState([]);
+  const [score_info_1, setScore_info_1] = useState([]);
+  const [score_info_3, setScore_info_3] = useState([]);
+  const [score_info_6, setScore_info_6] = useState([]);
+  const [score_info_12, setScore_info_12] = useState([]);
+  
+  const category = {0:'data_short', 1: 'data_medium', 2:'data_long'};
+  const [invest_info, setInvest_info] = useState(0);
+  
+  useEffect(()=> {
+    console.log("refresh")
+    const unsubscribe = DB.collection('tier_system')
+      .doc(params.id)
+      .collection(category[invest_info])
+      .onSnapshot(snapshot => {
+        const list = [];
+        snapshot.forEach(doc => {
+            list.push(doc.data());
+            //console.log(list[0]["tier_list"]["1st"]);
+        });      
+        setStock_info_1(list[0]["tier_list"]["1st"]);
+        setStock_info_2(list[0]["tier_list"]["2nd"]);
+        setStock_info_3(list[0]["tier_list"]["3rd"]);
+
+        setScore_info_1(list[0]["score_list"]["1개월"]);
+        setScore_info_3(list[0]["score_list"]["3개월"]);
+        setScore_info_6(list[0]["score_list"]["6개월"]);
+        setScore_info_12(list[0]["score_list"]["12개월"]);
+      });
+
+      return () => unsubscribe();
+  }, [invest_info]);
+  
+  let data = [
+    {
+    type: 'scatterpolar',   r: [10, 10, 10, 10],   theta: ['적중률','수익률','정밀도','적중률'], 
+    fill: 'toself',   name: 'WARD',  line: {    color: '#E99314',  },
+    },
+    {
+      type: 'scatterpolar',     r: [10, 10, 10,10],     theta: ['적중률','수익률','정밀도','적중률'], 
+      fill: 'toself',     name: '시장 평균',     line: {      color: 'gray',    },
+      }
+  ];
+
+  const Radar_chart_1 = () => {
+    score_info_1.push(score_info_1[0]);
+    data[0]["r"] = score_info_1;
+      return(
+        <View style={styles.chart_container} >
+        <Plotly  data={data} layout={layout} debug enableFullPlotly />
+        <View style={styles.hide_box1}/>
+        <View style={styles.hide_box2}/>
+      </View>
+      );
+  };
+  const Radar_chart_3 = () => {
+    score_info_3.push(score_info_3[0]);
+    data[0]["r"] = score_info_3;
+    return(
+      <View style={styles.chart_container} >
+      <Plotly  data={data} layout={layout} debug enableFullPlotly />
+      <View style={styles.hide_box1}/>
+      <View style={styles.hide_box2}/>
+    </View>
+    );
+};
+const Radar_chart_6 = () => {
+  score_info_6.push(score_info_6[0]);
+  data[0]["r"] = score_info_6;
+  return(
+    <View style={styles.chart_container} >
+    <Plotly  data={data} layout={layout} debug enableFullPlotly />
+    <View style={styles.hide_box1}/>
+    <View style={styles.hide_box2}/>
+  </View>
+  );
+};
+const Radar_chart_12 = () => {
+  score_info_12.push(score_info_12[0]);
+  data[0]["r"] = score_info_12;
+  return(
+    <View style={styles.chart_container} >
+    <Plotly  data={data} layout={layout} debug enableFullPlotly />
+    <View style={styles.hide_box1}/>
+    <View style={styles.hide_box2}/>
+  </View>
+  );
+};
+  
+  const prefix = 'https://firebasestorage.googleapis.com/v0/b/ward-1-2bf63.appspot.com/o';
+  let url_name = params.name.replace(/ /g, "");
+  let img_url = `${prefix}/algorithm_profile%2F${url_name}.png?alt=media`;
+
   return(
     
     <SafeAreaView>
@@ -289,12 +366,12 @@ const Algorithm = ({ navigation }, params) => {
         <View style={styles.top_rowcontatiner}>
           <Image
             style={{height:wp('100%')/375*77 , width: wp('100%')/375*77, borderRadius : 10,}}
-            source={require('../image/top_1.png')}
+            source= {{uri: img_url}}
           />
           <View style={styles.top_container}>
             <View >
-            <Text style={styles.top_text_1}>WARD Tier System</Text>
-            <Text style={styles.top_text_2}>ALL|ALL|딥러닝</Text>
+            <Text style={styles.top_text_1}>{params.name}</Text>
+            <Text style={styles.top_text_2}>{params.invest_term} | {params.used_data} | {params.algo_type}</Text>
             </View>
 
             <View style={styles.top_row_smallcontainer}>
@@ -302,7 +379,8 @@ const Algorithm = ({ navigation }, params) => {
               <SelectDropdown
                 data={Al_options}
                 onSelect={(selectedItem, index) => {
-                  console.log(selectedItem, index)
+                  setInvest_info(index)
+                  console.log(invest_info, selectedItem, index)
                 }}
                 defaultButtonText={'단기'}
                 buttonStyle={styles.select_box}
@@ -333,13 +411,11 @@ const Algorithm = ({ navigation }, params) => {
         <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
             tabBarTextStyle={styles.tabBarTextStyle}
           >
-            <Radar_chart tabLabel={'최근 1개월'}/>
-              
-            <Radar_chart tabLabel={'최근 3개월'}/>
+            <Radar_chart_1 tabLabel={'최근 1개월'} />
+            <Radar_chart_3 tabLabel={'최근 3개월'} />
+            <Radar_chart_6 tabLabel={'최근 6개월'} />
+            <Radar_chart_12 tabLabel={'최근 12개월'} />
 
-            <Radar_chart tabLabel={'최근 6개월'}/>
-
-            <Radar_chart tabLabel={'최근 12개월'}/>
         </ScrollableTabView>
         </View>
                
@@ -351,11 +427,11 @@ const Algorithm = ({ navigation }, params) => {
           />
           <FlatList 
             keyExtractor={item => item['id']}
-            data = {algo_info}
+            data = {formatData(stock_info_1, 4)}
             renderItem = {({item}) => (
               <Item item = {item} />
             )}
-            numColumns = {3}
+            numColumns = {4}
             />
         </View>
 
@@ -364,34 +440,14 @@ const Algorithm = ({ navigation }, params) => {
             style={{height:wp('100%')/375*29 , width: wp('100%')/375*23,}}
             source={require('../image/tier_label_2.png')}
           />
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_2_1.png')}
+          <FlatList 
+            keyExtractor={item => item['id']}
+            data = {formatData(stock_info_2, 4)}
+            renderItem = {({item}) => (
+              <Item item = {item} />
+            )}
+            numColumns = {4}
             />
-            <Text style={styles.tier_component_text}>현대차</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_2_2.png')}
-            />
-            <Text style={styles.tier_component_text}>카카오</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_2_3.png')}
-            />
-            <Text style={styles.tier_component_text}>기아</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_2_4.png')}
-            />
-            <Text style={styles.tier_component_text}>셀트리온</Text>
-          </View>
         </View>
 
         <View style={styles.row_tier_container}>
@@ -399,34 +455,14 @@ const Algorithm = ({ navigation }, params) => {
             style={{height:wp('100%')/375*29 , width: wp('100%')/375*23,}}
             source={require('../image/tier_label_3.png')}
           />
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_3_1.png')}
+          <FlatList 
+            keyExtractor={item => item['id']}
+            data = {formatData(stock_info_3, 4)}
+            renderItem = {({item}) => (
+              <Item item = {item} />
+            )}
+            numColumns = {4}
             />
-            <Text style={styles.tier_component_text}>현대차</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_3_2.png')}
-            />
-            <Text style={styles.tier_component_text}>카카오</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_3_3.png')}
-            />
-            <Text style={styles.tier_component_text}>기아</Text>
-          </View>
-          <View style={styles.tier_component_container}>
-            <Image
-              style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,}}
-              source={require('../image/tier_component_3_4.png')}
-            />
-            <Text style={styles.tier_component_text}>셀트리온</Text>
-          </View>
         </View>
 
         

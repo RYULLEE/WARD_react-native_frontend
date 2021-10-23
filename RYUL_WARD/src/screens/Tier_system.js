@@ -122,7 +122,7 @@ const Item = ({item: {id, name, invest_term, used_data, algo_type}, onPress}) =>
   let img_url = `${prefix}/algorithm_profile%2F${url_name}.png?alt=media`;
   //console.log(img_url);
   return(
-      <TouchableOpacity style={styles.item_box} onPress= {()=> onPress({id, name})}>
+      <TouchableOpacity style={styles.item_box} onPress= {()=> onPress({id, name, algo_type, invest_term, used_data})}>
         <Image
             style={{height:wp('100%')/375*109 , width: wp('100%')/375*109, borderRadius : 10,}}
             source= {{uri: img_url}}
@@ -142,10 +142,11 @@ const formatData = (data, numColumns) => {
   return data;
 }
 
-const Page_1=({Home, CATEGORY}, text) => {
+const Page_1=({Home, CATEGORY}) => {
   const handleItemPress = params => {
     navigation.navigate('ALGORITHM', params);
 };
+
   const [algo_info, setAlgo_info] = useState([]);
   useEffect(()=> {
     const unsubscribe = DB.collection('tier_system')

@@ -1,80 +1,17 @@
-import React,{Component, useLayoutEffect} from 'react';
+import React,{Component, useLayoutEffect, useState, useEffect, useRef} from 'react';
 import { Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
-import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { SliderBox } from 'react-native-image-slider-box';
-//import TabViewExample from '../navigations/home_slide_tab';
-//import ScrollableTabView,{ ScrollableTabBar }  from 'react-native-scrollable-tab-view';
-//import { render } from 'react-router-dom';
-//import Tabs from '../navigations/home_slide_tab';
-//import { TabView, SceneMap } from 'react-native-tab-view';
-import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
-import Ranking from '../components/ranking';
-import { NavigationContainer } from '@react-navigation/native';
-import {images} from '../utils/images'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 //import Search_Bar from '../components/SearchBar';
 import { ListItem, SearchBar } from "react-native-elements";
-import filter from "lodash.filter";
-import { useNavigation } from '@react-navigation/native';
-import { withNavigation } from 'react-navigation';
 
+import { DB } from '../utils/firebase';
+import { render } from 'react-dom';
 
 const width = Dimensions.get('window').width;
 
-const DATA = [
-    {
-      id: "1",
-      title: "WARD Tier System 1",
-    },
-    {
-      id: "2",
-      title: "이률 이률",
-    },
-    {
-      id: "3",
-      title: "WARD Tier System 3",
-    },
-    {
-      id: "4",
-      title: "이두호 이두호",
-    },
-    {
-      id: "5",
-      title: "WARD Tier System 5",
-    },
-    {
-      id: "6",
-      title: "이찬규 이찬규",
-    },
-    {
-      id: "7",
-      title: "WARD Tier System 7",
-    },
-    {
-      id: "8",
-      title: "WARD Tier System 8",
-    },
-    {
-      id: "9",
-      title: "WARD Tier System 9",
-    },
-    {
-      id: "10",
-      title: "WARD Tier System 10",
-    },
-    {
-      id: "11",
-      title: "WARD Tier System 11",
-    },
-    {
-      id: "12",
-      title: "삼성전자",
-    },
-  ];
-    
+
   const Item = ({ title }) => {
     return (
         <TouchableOpacity>
@@ -84,22 +21,28 @@ const DATA = [
         </TouchableOpacity>
     );
   };
-    
+  
+
   const renderItem = ({ item }) => <Item title={item.title} />;
 
   let search_text_under='인기 검색';
   let search_text_under_height=60;
   let show_okay = true;
+
+  //const Data = DATA();
+  //console.log(Data);
   class Search_Bar extends Component {
+    
     constructor(props) {
+      //console.log(props.search_data);
       super(props);
       this.state = {
         loading: false,
-        data: DATA,
+        data: this.props.search_data,
         error: null,
         searchValue: "",
       };
-      this.arrayholder = DATA;
+      this.arrayholder = this.props.search_data;
     }
     
     searchFunction = (text) => {
@@ -121,8 +64,9 @@ const DATA = [
       }
     };
     
+
     render() {
-    
+      
      
       return (
         <View>
@@ -235,14 +179,33 @@ const styles = StyleSheet.create({
 
 const Search = ({ navigation }) => {
 
+  const [algo_info, setAlgo_info] = useState([]);
+  const collection = ['tier_system', 'timing_algo', 'portfolio_algo','etc_algo'];
+  //const ref = useRef();
+  useEffect(()=> {
+      const unsubscribe = DB.collection(collection[0])
+      .orderBy('name')
+      .onSnapshot(snapshot =>{
+        let list =[];
+        snapshot.forEach(doc=>{
+        let obj = doc.data();
+        obj["title"] = obj["name"];
+        list.push(obj);
+        //console.log(list);
+        });
+      //console.log(list);
+      setAlgo_info(list);
+      })
+    return ()=> unsubscribe();
+  }, []);
+
+  console.log(algo_info);
+
   return (
       <SafeAreaView>
       <ScrollView style={{backgroundColor:'#ffffff'}}>
-          
           <View style={styles.top_container}>
-         
-          <Search_Bar/>
-
+          <Search_Bar search_data = {algo_info}/>
           <View style={styles.back_container}>
             <Ionicons
                 name="arrow-back-outline"
@@ -253,11 +216,10 @@ const Search = ({ navigation }) => {
             />
           </View>
         </View>
-
-         
       </ScrollView>
       </SafeAreaView>
   );
+  
 };
 
 export default Search;

@@ -123,7 +123,7 @@ const Item = ({item: {id, name, invest_term, used_data, algo_type, empty}, onPre
   const prefix = 'https://firebasestorage.googleapis.com/v0/b/ward-1-2bf63.appspot.com/o';
   let url_name = name.replace(/ /g, "");
   let img_url = `${prefix}/algorithm_profile%2F${url_name}.png?alt=media`;
-  //console.log(img_url);
+  console.log(img_url);
   return(
       <TouchableOpacity style={styles.item_box} onPress= {()=> onPress({id, name, algo_type, invest_term, used_data})}>
         <Image
@@ -137,11 +137,13 @@ const Item = ({item: {id, name, invest_term, used_data, algo_type, empty}, onPre
 };
 const formatData = (data, numColumns) => {
   const numberOfFullRows = Math.floor(data.length / numColumns);
+  
   let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
   while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
     data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
     numberOfElementsLastRow++;
   }
+  console.log(data);
   return data;
 }
 
@@ -152,7 +154,7 @@ const Page_1=({Home, CATEGORY}) => {
 
   const [algo_info, setAlgo_info] = useState([]);
   useEffect(()=> {
-    const unsubscribe = DB.collection('tier_system')
+    const unsubscribe = DB.collection('portfolio_algo')
       .orderBy('name')
       .onSnapshot(snapshot =>{
         const list =[];
@@ -160,6 +162,7 @@ const Page_1=({Home, CATEGORY}) => {
           let obj = doc.data();
           obj["id"] = doc.id;
           list.push(obj);
+          console.log(list)
         });
         setAlgo_info(list);
       });
@@ -208,10 +211,10 @@ const Tier_system = ({ navigation }) => {
     return (
       <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
-          <TouchableOpacity onPress= {() => navigation.navigate('ALGORITHM')}>
+          <TouchableOpacity>
           <Image  style={{
             height:wp('100%')/375*200, width: wp('100%'),}}
-            source={{uri: images.Tier_System_Banner}}
+            source={{uri: images.Timer_Banner}}
           />
           </TouchableOpacity>
           <View style={styles.rowcontatiner}>

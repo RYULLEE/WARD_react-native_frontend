@@ -130,13 +130,13 @@ const Category = ({navigation, route}) => {
           />
           </TouchableOpacity>
           <View style={styles.smallcontatiner}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {() => navigation.navigate('Category_Portfolio')}>
             <Image
               style={{height:wp('100%')/375*106 , width: wp('100%')/375*109, borderRadius : 10,}}
               source={require('../image/category_2.png')}
             />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {() => navigation.navigate('Category_Etc')}>
             <Image
               style={{height:wp('100%')/375*106 , width: wp('100%')/375*109, borderRadius : 10,}}
               source={require('../image/category_3.png')}
@@ -145,7 +145,7 @@ const Category = ({navigation, route}) => {
           </View>
 
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress= {() => navigation.navigate('Category_Timing')}>
         <Image
               style={{height:(wp('100%')-32)/343*125 , width: wp('100%')-32, borderRadius : 10,marginTop:16,}}
               source={require('../image/category_4.png')}

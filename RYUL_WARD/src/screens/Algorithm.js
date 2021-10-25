@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   tier_component_container : {
-    justifyContent:'center',
+    justifyContent:'flex-start',
     alignItems: 'center',
   },
   tier_component_text : {
@@ -214,9 +214,10 @@ const icon=() => {
 };
 
 
-const Item = ({item}) => {
+const Item = ({item, color}) => {
   const prefix = 'https://firebasestorage.googleapis.com/v0/b/ward-1-2bf63.appspot.com/o';
-  let stock_num = item
+  //console.log(color);
+  let stock_num = item;
   let img_url = `${prefix}/stock_image%2F${stock_num}.png?alt=media`;
   const [stock_name, setStock_name] = useState([]);
   useEffect(()=> {
@@ -233,7 +234,7 @@ const Item = ({item}) => {
         setStock_name(list[0]["한글 종목약명"]);
       });
         return ()=> unsubscribe();
-  }, []);
+  }, [item]);
 
   //console.log(img_url)
   return(
@@ -241,7 +242,7 @@ const Item = ({item}) => {
             <Image
               style={{height:wp('100%')/375*48 , width: wp('100%')/375*48,
               borderWidth: 3, 
-              borderColor: "#F08683",
+              borderColor: color,
               marginHorizontal: 12}}
               source={{uri: img_url}}
               
@@ -361,7 +362,7 @@ const Radar_chart_12 = () => {
   return(
     
     <SafeAreaView>
-        <ScrollView style={{backgroundColor:'#ffffff',}}>
+        <ScrollView style={{backgroundColor:'#ffffff'}}>
 
         <View style={styles.top_rowcontatiner}>
           <Image
@@ -422,14 +423,14 @@ const Radar_chart_12 = () => {
         <Text style={styles.subtitle}>종목 티어 표</Text>
         <View style={styles.row_tier_container}>
           <Image
-            style={{height:wp('100%')/375*29 , width: wp('100%')/375*23,}}
+            style={{height:wp('100%')/375*29 , width: wp('100%')/375*23, marginRight: (wp('100%')-360)/2}}
             source={require('../image/tier_label_1.png')}
           />
           <FlatList 
             keyExtractor={item => item['id']}
             data = {formatData(stock_info_1, 4)}
             renderItem = {({item}) => (
-              <Item item = {item} />
+              <Item item = {item} color = {"#F08683"}/>
             )}
             numColumns = {4}
             />
@@ -437,31 +438,32 @@ const Radar_chart_12 = () => {
 
         <View style={styles.row_tier_container}>
           <Image
-            style={{height:wp('100%')/375*29 , width: wp('100%')/375*23,}}
+            style={{height:wp('100%')/375*29 , width: wp('100%')/375*23, marginRight: (wp('100%')-360)/2}}
             source={require('../image/tier_label_2.png')}
           />
           <FlatList 
             keyExtractor={item => item['id']}
             data = {formatData(stock_info_2, 4)}
             renderItem = {({item}) => (
-              <Item item = {item} />
+              <Item item = {item } color = {"#F6C189"}/>
             )}
             numColumns = {4}
             />
         </View>
 
-        <View style={styles.row_tier_container}>
+        <View style={styles.row_tier_container} marginBottom = {40}>
           <Image
-            style={{height:wp('100%')/375*29 , width: wp('100%')/375*23,}}
+            style={{height:wp('100%')/375*29 , width: wp('100%')/375*23, marginRight: (wp('100%')-360)/2}}
             source={require('../image/tier_label_3.png')}
           />
           <FlatList 
             keyExtractor={item => item['id']}
             data = {formatData(stock_info_3, 4)}
             renderItem = {({item}) => (
-              <Item item = {item} />
+              <Item item = {item} color = {"#69C356"}/>
             )}
             numColumns = {4}
+            
             />
         </View>
 

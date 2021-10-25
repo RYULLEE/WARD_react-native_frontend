@@ -7,6 +7,9 @@ import TabNavigation from './Tab';
 import Algorithm from '../screens/Algorithm';
 import Portfolio from '../screens/Portfolio';
 import Timer from '../screens/Timer';
+import Category_Timing from '../screens/Category_Timing';
+import Category_Portfolio from '../screens/Category_Portfolio';
+import Category_Etc from '../screens/Category_Etc';
 
 
 const Stack2 = createStackNavigator();
@@ -38,7 +41,29 @@ const CategoryStack = () => {
             headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
             //headerStyle: { height : 60},
             }}/>
-            
+
+            <Stack2.Screen name='Category_Timing' component={Category_Timing} options={{ title: 'T I M E R' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+            <Stack2.Screen name='Category_Portfolio' component={Category_Portfolio} options={{ title: 'P O R T F O L I O' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+            <Stack2.Screen name='Category_Etc' component={Category_Etc} options={{ title: 'A N A L Y S I S' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+
             <Stack2.Screen name='ALGORITHM' component={Algorithm} options={{ title: '' }} screenOptions={{
             headerTitleAlign: 'center',
             headerBackTitleVisible: false,

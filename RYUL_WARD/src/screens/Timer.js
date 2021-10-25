@@ -17,14 +17,11 @@ import filter from "lodash.filter";
 import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import RNPickerDialog from 'rn-modal-picker';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+
+import AxisLineChartScreen from './AxisLineChartScreen';
+import { Chart, VerticalAxis, HorizontalAxis, Line, Tooltip } from 'react-native-responsive-linechart'
+
+
 
 const styles = StyleSheet.create({
 
@@ -153,6 +150,7 @@ const styles = StyleSheet.create({
       marginHorizontal : 16,
       //marginBottom : 25,
       marginTop : 10,
+      marginBottom : 30,
     },
     name_row_inside_conatiner_1 : {
       //backgroundColor : 'red',
@@ -194,13 +192,13 @@ const styles = StyleSheet.create({
       includeFontPadding: false,
     },
     linechart_container : {
-      height : wp('100%')/375*220,
+      height : wp('100%')/375*170,
       width : wp('100%')/375*270,
-      //backgroundColor : 'red',
+      //backgroundColor : 'yellow',
       //marginLeft : -wp('100%')/375*30,
-      justifyContent : 'flex-end',
-      marginLeft : 16,
-      //borderWidth : 1,
+      //justifyContent : 'center',
+      //marginLeft : 16,
+      borderWidth : 1,
       borderRadius : 10,
       borderColor : '#E9E9E9',
     },
@@ -208,7 +206,7 @@ const styles = StyleSheet.create({
       alignItems : 'center',
       justifyContent : 'center',
       height : wp('100%')/375*190,
-      width : wp('100%')/375*270,
+      width : wp('100%')/375*290,
       borderWidth : 1,
       borderRadius : 10,
       borderColor : '#E9E9E9',
@@ -219,44 +217,55 @@ const styles = StyleSheet.create({
     large_linechart_container : {
       flexDirection : 'row',
       width : wp('100%')-32,
-      //justifyContent : 'space-around',
+      //height : 1000,
+      //justifyContent : 'space-evenly',
       alignItems : 'flex-start',
-      marginLeft : wp('100%')/375*3,
-      
-    }
+      marginLeft : 16,
+      //backgroundColor : 'red',
+      //zIndex:1,
+    },
+    line_box_make : {
+      height: wp('100%')/375*1,
+      borderRadius : 1,
+      width: '100%',
+      borderStyle: 'dashed',
+      borderWidth: 1,
+      borderColor : '#C4C4C4',
+
+    },
+
+    x_label_text : {
+      fontFamily: 'NotoSansKR_500Medium',
+      fontSize : 10,
+      //lineHeight: 30,
+      includeFontPadding: false,
+    },
+
+    x_label_row_container : {
+      width : wp('100%')/375*236,
+      flexDirection : 'row',
+      justifyContent : 'space-between',
+      position : 'absolute',
+      marginHorizontal : wp('100%')/375*10,
+      //backgroundColor : 'green',
+      marginTop : wp('100%')/375*145,
+    },
    
 });
 
 const screenWidth = Dimensions.get("window").width;
 
-
-const chartConfig = {
-  backgroundGradientFrom: "#ffffff",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#ffffff",
-  backgroundGradientToOpacity: 0,
-  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  //barPercentage: 0.5,
-  useShadowColorFromDataset: true, // optional
-  
-};
-
-const d = [60, 50, 100, 0, 10,];
-
-const data_linechart = {
-  labels: ["9/30", "10/1", "10/4", "10/5", "10/6",],
-  datasets: [
-    {
-      data: [60, 50, 100, 0, 10,],
-      color: (opacity = 1) => `rgba(141,126,181, ${opacity})`, 
-      strokeWidth: 2 // optional
-    }
-  ],
-  //legend: ["Rainy Days"] // optional
-};
+const data_linechart = [
+  { x: 0, y: 60 },
+  { x: 1, y: 45 },
+  { x: 2, y: 55 },
+  { x: 3, y: 0 },
+  { x: 4, y: 100 }
+]
 
 
+
+const data_date =['9/30' , '10/1', '10/4', '10/5', '10/6']
 
 const show_name=false;
 
@@ -381,11 +390,63 @@ class Search_Bar_name extends React.Component {
       <View>
       { (this.state.selectedText!=''?true:false) && 
         <View>
+            <View style={styles.large_linechart_container}>
+            <View style={styles.linechart_container}>
+            <Chart
+              style={{ height: wp('100%')/375*140, width: wp('100%')/375*255, backgroundColor: '#ffffff' }}
+              xDomain={{ min: 0, max: 4 }}
+              yDomain={{ min: 0, max: 100 }}
+              padding={{ left: wp('100%')/375*20, top: wp('100%')/375*30, bottom: wp('100%')/375*10, right: wp('100%')/375*15 }}
+            >
+              <VerticalAxis tickValues={[50]} theme={{
+                axis: {
+                  visible: false,
+                },
+              }} />
+              <HorizontalAxis tickCount={0} theme={{
+                axis: {
+                  visible: false,
+                },
+              }}/>
+              <Line  data={data_linechart} smoothing="none" theme={{ 
+                stroke: { color: '#8D7EB5', width: 5 }, 
+                scatter: { default: { width: 15, height: 15, rx: 10, color: '#8D7EB5' },
+                selected: { color: '#6A0888' } },
+                dataPoint: {
+                  visible: true,
+                  color: "black",
+                  radius: 3,
+                  label: { visible: true, marginBottom: 25 }
+                },
             
+            }} 
+            tooltipComponent={<Tooltip theme={{ formatter: ({ y }) => y.toFixed(0), }} />}
+            onTooltipSelect={{ value: { x: 10, y: 10, }, index: 2}}
+            
+            initialTooltipIndex='4'
+            />
+              
+            </Chart>
+            <View style={styles.x_label_row_container}>
+              <Text style={styles.x_label_text}>{data_date[0]}</Text>
+              <Text style={styles.x_label_text}>{data_date[1]}</Text>
+              <Text style={styles.x_label_text}>{data_date[2]}</Text>
+              <Text style={styles.x_label_text}>{data_date[3]}</Text>
+              <Text style={styles.x_label_text}>{data_date[4]}</Text>
+            </View>
+
+            </View>  
+
+            <Image
+              style={{ height: wp('100%')/375*170, width:wp('100%')/375*40, borderRadius: 10, marginLeft : 10,}}
+              source={require('../image/buy_sell.png')}
+            />                
+
+            </View>
         </View>
       }
       </View>
-
+      
 
 
       </View>
@@ -393,13 +454,6 @@ class Search_Bar_name extends React.Component {
     );
   }
 }
-
-const minValue = 0;
-const maxValue = Math.max.apply(null,d);
-function* yLabel() {
-  yield* [minValue, '50', maxValue];
-}
-const yLabelIterator = yLabel();
 
 
 const Timer = ({ navigation }) => {
@@ -411,56 +465,13 @@ const Timer = ({ navigation }) => {
 
             <Search_Bar_name/>
 
-            <View style={styles.large_linechart_container}>
-            <View style={styles.linechart_container}>
-            <LineChart
-              data={data_linechart}
-              width={wp('100%')/375*330}
-              height={wp('100%')/375*200/100*maxValue}
-              chartConfig={chartConfig}
-              withVerticalLines = {false}
-              fromZero = {true}
-              yAxisInterval={1000}
-              yLabelsOffset={10}
-              segments={2}
-              withHorizontalLabels = {false}
-              //withVerticalLabels = {false}
-              style={{marginLeft:-wp('100%')/375*40}}
-              withVerticalLines={false}
-              withHorizontalLines={false}
-              withShadow={false}
-              propsForDots= {
-                r= "6",
-                strokeWidth= "2",
-                stroke= "#fff"
-            }
-              renderDotContent = {({x, y, index}) => <Text style={{ position: 'absolute', top: y-wp('100%')/375*19, left: x-wp('100%')/375*9 }} >{d[index]}</Text>}
-              xLabelsOffset = {-wp('100%')/375*8}
-              //horizontalLabelRotation= {50}
-              //hidePointsAtIndex='4'
-              //formatYLabel= {yLabel}
-              //formatYLabel={() => yLabelIterator.next().value}
-            />
             
-            </View>
-
-            <Image
-              style={{ height: wp('100%')/375*190, width:wp('100%')/375*50, borderRadius: 15,marginLeft : wp('100%')/375*15, marginTop : wp('100%')/375*14, }}
-              source={require('../image/buy_sell.png')}
-            />
-            <View style={styles.line_box}>
-              <Image
-                style={{ height: wp('100%')/375*1, width:wp('100%')/375*250, borderRadius: 15,  }}
-                source={require('../image/line_box.png')}
-              />
-            </View>
-
-            </View>
         </ScrollView>
         </SafeAreaView>
 
     );
 
 };
+
 
 export default Timer;

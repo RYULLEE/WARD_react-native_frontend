@@ -10,7 +10,7 @@ import Timer from '../screens/Timer';
 import Category_Timing from '../screens/Category_Timing';
 import Category_Portfolio from '../screens/Category_Portfolio';
 import Category_Etc from '../screens/Category_Etc';
-
+import Similar from '../screens/Similar';
 
 const Stack2 = createStackNavigator();
 
@@ -79,6 +79,13 @@ const CategoryStack = () => {
             }}/>
 
             <Stack2.Screen name='TIMER' component={Timer} options={{ title: '' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>
+
+            <Stack2.Screen name='SIMILAR' component={Similar} options={{ title: '' }} screenOptions={{
             headerTitleAlign: 'center',
             headerBackTitleVisible: false,
             

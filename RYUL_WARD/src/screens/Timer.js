@@ -3,24 +3,10 @@ import { AppRegistry, processColor, Button,useWindowDimensions, TouchableOpacity
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { SliderBox } from 'react-native-image-slider-box';
-import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
-import Ranking from '../components/ranking';
-import { NavigationContainer } from '@react-navigation/native';
-import SelectDropdown from 'react-native-select-dropdown';
-import { useNavigation } from '@react-navigation/native';
-import Plotly from 'react-native-plotly';
-import RadarChartScreen from '../components/RadarChartScreen';
-import { DB } from '../utils/firebase';
-import { ListItem, SearchBar } from "react-native-elements";
-import filter from "lodash.filter";
-import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import RNPickerDialog from 'rn-modal-picker';
-
-import AxisLineChartScreen from './AxisLineChartScreen';
 import { Chart, VerticalAxis, HorizontalAxis, Line, Tooltip } from 'react-native-responsive-linechart'
-
+import { DB } from '../utils/firebase';
 
 
 const styles = StyleSheet.create({
@@ -40,37 +26,6 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         marginRight: 16,
     },
-    notice_container:{
-      alignItems:'flex-start',
-      marginLeft: 16,
-      marginRight: 16,
-      borderBottomColor: '#E9E9E9',
-      borderBottomWidth : 1,
-      
-    },
-    input_text : {
-      fontFamily: 'NotoSansKR_500Medium',
-      fontSize : 16,
-      //lineHeight: 30,
-      includeFontPadding: false,
-    },
-    title_text : {
-    
-      fontFamily: 'NotoSansKR_500Medium',
-      fontSize : 16,
-      //lineHeight: 30,
-      includeFontPadding: false,
-      marginTop:20,
-      color: '#6F7985',
-      marginLeft: 31,
-      marginBottom: 15,
-
-
-    },
-
-
-
-
     container: {
       //flex: 1,
       alignItems: 'center',
@@ -224,23 +179,12 @@ const styles = StyleSheet.create({
       //backgroundColor : 'red',
       //zIndex:1,
     },
-    line_box_make : {
-      height: wp('100%')/375*1,
-      borderRadius : 1,
-      width: '100%',
-      borderStyle: 'dashed',
-      borderWidth: 1,
-      borderColor : '#C4C4C4',
-
-    },
-
     x_label_text : {
       fontFamily: 'NotoSansKR_500Medium',
       fontSize : 10,
       //lineHeight: 30,
       includeFontPadding: false,
     },
-
     x_label_row_container : {
       width : wp('100%')/375*236,
       flexDirection : 'row',
@@ -271,51 +215,10 @@ const show_name=false;
 
 class Search_Bar_name extends React.Component {
   constructor(props) {
+    console.log(props.search_data);
     super(props);
     this.state = {
-      data: [
-        {
-          id: 1,
-          name: '삼성전자',
-        },
-        {
-          id: 2,
-          name: 'SK 하이닉스',
-        },
-        {
-          id: 3,
-          name: 'NAVER',
-        },
-        {
-          id: 4,
-          name: '삼성바이오로직스',
-        },
-        {
-          id: 5,
-          name: 'LG 화학',
-        },
-        {
-          id: 6,
-          name: '카카오',
-        },
-        {
-          id: 7,
-          name: '삼성전자우',
-        },
-        {
-          id: 8,
-          name: '삼성SDI',
-        },
-        {
-          id: 9,
-          name: '현대차',
-        },
-        {
-          id: 10,
-          name: '기아',
-        },
-        
-      ],
+      data: this.props.search_data,
       placeHolderText: '종목명 또는 종목 코드 검색',
       selectedText: '',
       defaultValue: true,
@@ -441,37 +344,42 @@ class Search_Bar_name extends React.Component {
               style={{ height: wp('100%')/375*170, width:wp('100%')/375*40, borderRadius: 10, marginLeft : 10,}}
               source={require('../image/buy_sell.png')}
             />                
-
             </View>
         </View>
       }
       </View>
-      
-
-
       </View>
       
     );
   }
 }
 
-
 const Timer = ({ navigation }) => {
+  const [stock_info, setStock_info] = useState([]);
+  useEffect(()=> {
+    const unsubscribe = DB.collection('Market_info')
+          //.orderBy('name')
+          .onSnapshot(snapshot =>{
+            const list =[];
+          snapshot.forEach(doc=>{
+            let obj ={};
+            obj["name"] = doc.data()["한글 종목약명"]; 
+            list.push(obj);
+          });
+          setStock_info(list);
+          });
+          return ()=> unsubscribe();
+  }, []);
 
     return(
         <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
             <Text style={styles.subtitle}>Timing Score</Text>
 
-            <Search_Bar_name/>
-
-            
+            <Search_Bar_name search_data = {stock_info}/> 
         </ScrollView>
         </SafeAreaView>
-
     );
-
 };
-
 
 export default Timer;

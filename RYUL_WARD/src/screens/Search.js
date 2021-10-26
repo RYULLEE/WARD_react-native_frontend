@@ -31,8 +31,10 @@ const width = Dimensions.get('window').width;
 
   //const Data = DATA();
   //console.log(Data);
+
   class Search_Bar extends Component {
-    
+    //const [algo_info, setAlgo_info] = useState([]);
+
     constructor(props) {
       //console.log(props.search_data);
       super(props);
@@ -182,29 +184,35 @@ const Search = ({ navigation }) => {
   const [algo_info, setAlgo_info] = useState([]);
   const collection = ['tier_system', 'timing_algo', 'portfolio_algo','etc_algo'];
   //const ref = useRef();
+  
+
   useEffect(()=> {
-      const unsubscribe = DB.collection(collection[0])
-      .orderBy('name')
-      .onSnapshot(snapshot =>{
+    async function make_data() {
         let list =[];
-        snapshot.forEach(doc=>{
-        let obj = doc.data();
-        obj["title"] = obj["name"];
-        list.push(obj);
-        //console.log(list);
-        });
-      //console.log(list);
-      setAlgo_info(list);
-      })
-    return ()=> unsubscribe();
+        await DB
+          .collection(collection[0])
+          .orderBy('name')
+          .onSnapshot(snapshot =>{
+            snapshot.forEach(doc=>{
+            let obj = doc.data();
+            obj["title"] = obj["name"];
+            list.push(obj);
+            //console.log(list);
+            });
+          //console.log(list);
+        setAlgo_info(list);
+      });
+    };
+    make_data();
   }, []);
 
-  console.log(algo_info);
+  //console.log(algo_info);
 
   return (
       <SafeAreaView>
       <ScrollView style={{backgroundColor:'#ffffff'}}>
           <View style={styles.top_container}>
+          
           <Search_Bar search_data = {algo_info}/>
           <View style={styles.back_container}>
             <Ionicons

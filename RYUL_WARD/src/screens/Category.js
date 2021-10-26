@@ -1,4 +1,4 @@
-import React,{Component, useLayoutEffect} from 'react';
+import React,{Component, useLayoutEffect, useEffect, useState} from 'react';
 import { Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
@@ -8,6 +8,8 @@ import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native
 import Ranking from '../components/ranking';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { DB } from '../utils/firebase';
+import {images} from '../utils/images'
 
 
 const Container = styled.View`
@@ -98,8 +100,38 @@ const styles = StyleSheet.create({
   },
 });
 
-const Category = ({navigation, route}) => {
+const Item = ({item: {id, name, invest_term, used_data, algo_type, empty, screen_type}, onPress}) => {
+  if (empty == true){
+    return null;
+  }
+  const prefix = 'https://firebasestorage.googleapis.com/v0/b/ward-1-2bf63.appspot.com/o';
+  let url_name = name.replace(/ /g, "");
+  let img_url = `${prefix}/algorithm_profile%2F${url_name}.png?alt=media`;
+  //console.log(name);
+  return(
+    <View style={styles.top10smallcontainer}>
+          <TouchableOpacity onPress= {()=> onPress({screen_type, id, name, algo_type, invest_term, used_data})}>
+            <Image
+              style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
+              source= {{uri: img_url}} />
+            <Text style={styles.top10text_1}>{name}</Text>
+            <Text style={styles.top10text_2}>{invest_term}|{used_data}|{algo_type}</Text>
+            </TouchableOpacity>
+          </View>
+  );
+};
 
+const formatData = (data, numColumns) => {
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+  let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
+  while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
+    data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
+    numberOfElementsLastRow++;
+  }
+  return data;
+};
+
+const Category = ({navigation, route}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerBackTitleVisible: false,
@@ -117,6 +149,49 @@ const Category = ({navigation, route}) => {
       ),
     });
   }, []);
+
+  const algo_category = ['tier_system', 'timing_algo', 'portfolio_algo', 'etc_algo'];
+  const [algo_info, setAlgo_info] = useState([]);
+  let list =[];
+  
+  useEffect(()=> {
+    const unsubscribe = DB.collection(algo_category[0])
+      .orderBy('views', 'desc')//
+      .onSnapshot(snapshot =>{ snapshot.forEach(doc=>{
+          let obj = doc.data(); obj["id"] = doc.id; obj["screen_type"]=0; list.push(obj); 
+        });     
+      DB.collection(algo_category[1])
+      .orderBy('views', 'desc')//
+      .onSnapshot(snapshot =>{ snapshot.forEach(doc=>{
+          let obj = doc.data(); obj["id"] = doc.id; obj["screen_type"]=1;list.push(obj); 
+          });
+          DB.collection(algo_category[2])
+          .orderBy('views', 'desc')//
+          .onSnapshot(snapshot =>{ snapshot.forEach(doc=>{
+            let obj = doc.data(); obj["id"] = doc.id; obj["screen_type"]=2; list.push(obj); 
+            });
+            DB.collection(algo_category[3])
+            .orderBy('views', 'desc')//
+            .onSnapshot(snapshot =>{ snapshot.forEach(doc=>{
+              let obj = doc.data(); obj["id"] = doc.id; obj["screen_type"]=3; list.push(obj); 
+              });
+            list.sort((a, b) => (a.views <= b.views) ? 1 : -1)
+            list = list.slice(0, 10)
+            setAlgo_info(list)
+            });
+          });
+        });
+      });
+      return ()=> unsubscribe();
+  }, []);
+
+  const handleItemPress = params => {
+    //console.log(params.screen_type, "sdfs");
+    const screen = ["ALGORITHM", "TIMER", "PORTFOLIO"];
+    navigation.navigate(screen[params.screen_type], params);
+  };
+
+  //console.log(algo_info);
 
     return (
       <SafeAreaView>
@@ -154,62 +229,17 @@ const Category = ({navigation, route}) => {
         </View>
 
         <Text style={styles.subtitle}>인기 TOP 10 </Text>
-
+        
         <ScrollView horizontal={true} style={styles.top10rowcontatiner}>
-          <View style={styles.top10smallcontainer}>
-          <TouchableOpacity  onPress= {() => navigation.navigate('TIMER')}>
-            <Image
-              style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
-              source={require('../image/top_1.png')}
-            />
-          </TouchableOpacity>
-            <Text style={styles.top10text_1}>WARD Timer</Text>
-            <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
-          </View>
-
-          <View style={styles.top10smallcontainer}>
-          <TouchableOpacity onPress= {() => navigation.navigate('PORTFOLIO')}>
-            <Image
-              style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
-              source={require('../image/top_2.png')}
-            />
-            </TouchableOpacity>
-            <Text style={styles.top10text_1}>WARD Portfolio</Text>
-            <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
-          </View>
-
-          <View style={styles.top10smallcontainer}>
-          <TouchableOpacity>
-            <Image
-              style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
-              source={require('../image/top_3.png')}
-            />
-            </TouchableOpacity>
-            <Text style={styles.top10text_1}>WARD Timer</Text>
-            <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
-          </View>
-
-          <View style={styles.top10smallcontainer}>
-          <TouchableOpacity>
-            <Image
-              style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
-              source={require('../image/top_4.png')}
-            />
-            </TouchableOpacity>
-            <Text style={styles.top10text_1}>WARD Timer</Text>
-            <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
-          </View>
-
-          <View style={styles.top10smallcontainer}>
-          <TouchableOpacity>
-            <Image
-              style={{height:wp('100%')/375*96 , width: wp('100%')/375*96, borderRadius : 10,}}
-              source={require('../image/top_5.png')}
-            />
-            </TouchableOpacity>
-            <Text style={styles.top10text_1}>WARD Timer</Text>
-            <Text style={styles.top10text_2}>ALL|ALL|딥러닝</Text>
-          </View>
+        <FlatList
+          //horizontal
+          keyExtractor={item => item['id']}
+          data = {formatData(algo_info, 10)}
+          renderItem = {({item}) => (
+            <Item item = {item} onPress={handleItemPress}/>
+          )}
+          numColumns = {10}
+          />
 
         </ScrollView>
 

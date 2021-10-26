@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
 
 const Tier_options1 = ["ALL", "단기", "중기", "장기"];
 const Tier_options2 = ["ALL", "시세", "제무제표","기타 정보"];
-const Tier_options3 = ["ALL", "딥러닝", "머신 러닝","단순 통계"];
+const Tier_options3 = ["ALL", "딥러닝", "머신 러닝","단순통계"];
+const order_option = ["적중률", "수익률", "정밀도", "업로드"];
 
 const icon=() => {
 
@@ -145,7 +146,9 @@ const formatData = (data, numColumns) => {
   return data;
 }
 
-const Page_1=({Home, CATEGORY}) => {
+const Page_1=({invest_term, used_data, algo_type, order}) => {
+  console.log(invest_term, used_data, algo_type);
+  //console.log(Tier_options1[invest_term]);
   const handleItemPress = params => {
     navigation.navigate('ALGORITHM', params);
 };
@@ -153,18 +156,26 @@ const Page_1=({Home, CATEGORY}) => {
   const [algo_info, setAlgo_info] = useState([]);
   useEffect(()=> {
     const unsubscribe = DB.collection('tier_system')
-      .orderBy('name')
+      .orderBy(order_option[order])//
       .onSnapshot(snapshot =>{
-        const list =[];
+        let list =[];
         snapshot.forEach(doc=>{
           let obj = doc.data();
           obj["id"] = doc.id;
-          list.push(obj);
+
+          if(obj["invest_term"]==Tier_options1[invest_term] || obj["invest_term"] == "ALL" || invest_term == 0){
+            if(obj["used_data"]==Tier_options2[used_data] || obj["used_data"] == "ALL" || used_data == 0){
+              if(obj["algo_type"]==Tier_options3[algo_type] || obj["algo_type"] == "ALL"|| algo_type == 0 ){
+              list.push(obj);
+            }
+          }
+          }
+          list = Array.from(new Set(list));
         });
         setAlgo_info(list);
       });
       return ()=> unsubscribe();
-  }, []);
+  }, [invest_term, used_data, algo_type]);
 
   const navigation = useNavigation();
   return (
@@ -188,7 +199,9 @@ const Page_1=({Home, CATEGORY}) => {
 
 
 const Tier_system = ({ navigation }) => {
-
+  const [invest_term, setInvest_term] = useState(0);
+  const [used_data, setUsed_data] = useState(0);
+  const [algo_type, setAlgo_type] = useState(0);
   const [algo_info, setAlgo_info] = useState([]);
   useEffect(()=> {
     const unsubscribe = DB.collection('tier_system')
@@ -218,7 +231,8 @@ const Tier_system = ({ navigation }) => {
           <SelectDropdown
             data={Tier_options1}
             onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index)
+              //console.log(selectedItem, index)
+              setInvest_term(index)
             }}
             defaultButtonText={'투자 기간'}
             buttonStyle={styles.select_box_1}
@@ -230,7 +244,8 @@ const Tier_system = ({ navigation }) => {
           <SelectDropdown
             data={Tier_options2}
             onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index)
+              //console.log(selectedItem, index)
+              setUsed_data(index)
             }}
             defaultButtonText={'사용 데이터'}
             buttonStyle={styles.select_box}
@@ -241,7 +256,8 @@ const Tier_system = ({ navigation }) => {
           <SelectDropdown
             data={Tier_options3}
             onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index)
+              //console.log(selectedItem, index)
+              setAlgo_type(index)
             }}
             defaultButtonText={'알고리즘 종류'}
             buttonStyle={styles.select_box}
@@ -255,13 +271,13 @@ const Tier_system = ({ navigation }) => {
           <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
             tabBarTextStyle={styles.tabBarTextStyle}
           >
-            <Page_1 tabLabel={'• 적중률순'}/>
+            <Page_1 tabLabel={'• 적중률순'} invest_term = {invest_term} used_data = {used_data} algo_type = {algo_type} order = {0}/>
               
-            <Page_1 tabLabel={'• 수익률순'}/>
+            <Page_1 tabLabel={'• 수익률순'} invest_term = {invest_term} used_data = {used_data} algo_type = {algo_type} order = {1}/>
 
-            <Page_1 tabLabel={'• 정밀도순'}/>
+            <Page_1 tabLabel={'• 정밀도순'} invest_term = {invest_term} used_data = {used_data} algo_type = {algo_type} order = {2}/>
 
-            <Page_1 tabLabel={'• 업로드순'}/>
+            <Page_1 tabLabel={'• 업로드순'} invest_term = {invest_term} used_data = {used_data} algo_type = {algo_type} order = {3}/>
 
         </ScrollableTabView>
         </View>

@@ -1,4 +1,4 @@
-import React,{Component, useLayoutEffect} from 'react';
+import React,{Component, useLayoutEffect, useState} from 'react';
 import { Button,useWindowDimensions,  Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
@@ -25,6 +25,15 @@ const styles = StyleSheet.create({
       //marginLeft: 16,
       //marginTop: 25,
     },
+    subtitle_2: {
+      fontFamily: 'NotoSansKR_500Medium',
+      includeFontPadding: false,
+      lineHeight: 20,
+      fontSize: 18,
+      marginLeft: 16,
+      marginTop: 25,
+    },
+  
     top_row_smallcontainer : {
         flexDirection: 'row',
         alignItems:'flex-start',
@@ -103,6 +112,18 @@ const styles = StyleSheet.create({
             justifyContent : 'center',
             borderRadius : 10,
         },
+        FlatList_item_text : {
+          fontFamily: 'NotoSansKR_500Medium',
+          includeFontPadding: false,
+          //lineHeight: 20,
+          fontSize: 12,
+          marginTop : 10,
+        },
+        FlatList_container : {
+
+          marginLeft : 16,
+          marginTop : 20,
+        }
 
       
 
@@ -118,13 +139,66 @@ const icon=() => {
     );
   };
 
-  
+const FlatList_data = [
+
+  {
+    id : '1',
+    name:"네이버",
+    imageUrl:require('../image/similar_name_3.png'),
+  },
+  {
+    id : '2',
+    name:"카카오뱅크",
+    imageUrl:require('../image/similar_name_4.png'),
+  },
+  {
+    id : '3',
+    name:"네이버",
+    imageUrl:require('../image/similar_name_3.png'),
+  },
+  {
+    id : '4',
+    name:"카카오뱅크",
+    imageUrl:require('../image/similar_name_4.png'),
+  },
+  {
+    id : '5',
+    name:"네이버",
+    imageUrl:require('../image/similar_name_3.png'),
+  },
+  {
+    id : '6',
+    name:"카카오뱅크",
+    imageUrl:require('../image/similar_name_4.png'),
+  },
+]
 
 
+
+let select_name='1111111';
+
+const FlatList_item = ({name, imageUrl}) =>{
+
+   
+  const Select_flatlist_item = () => {
+    select_name={name}
+  }
+  return(
+  <TouchableOpacity onPress={Select_flatlist_item}>
+  <View style={{alignItems : 'center', justifyContent : 'center', marginRight : 20,}}>
+   <Image
+      style={{ height: wp('100%')/375*48, width: wp('100%')/375*48,  }}
+      source={imageUrl}
+    />
+    <Text style={styles.FlatList_item_text}>{name}</Text>
+  </View>
+  </TouchableOpacity>
+  );
+};
 
 const Similar = ({navigation}) => {
 
-
+  
   
       return (
         <SafeAreaView>
@@ -152,7 +226,20 @@ const Similar = ({navigation}) => {
             </View>
             </View>
 
-            <Search_bar_similar/>
+            <Search_bar_similar selected_name = {select_name}/>
+
+            <Text style={styles.subtitle_2}>상위 유사 종목</Text>
+
+            <View style={styles.FlatList_container}>
+            <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl}/>)} keyExtractor={item=>item.id} />
+            </View>
+
+            <Text style={styles.subtitle_2}>함께 분산투자하면 좋은 종목</Text>
+
+            <View style={styles.FlatList_container}>
+            <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl}/>)} keyExtractor={item=>item.id} />
+            </View>
+            
 
 
         </ScrollView>

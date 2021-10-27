@@ -264,7 +264,7 @@ class Search_bar_similar extends React.Component {
           
           <View style={styles.name_row_inside_conatiner_1_right}>
             <Text style={styles.name_text}>{this.state.selectedText}</Text>
-            <Text style={styles.name_sub_text}>선택한종목 설명</Text>
+            <Text style={styles.name_sub_text}>{this.props.selected_name}</Text>
           </View>
           <Image
                     style={{ height: wp('100%')/375*48, width: wp('100%')/375*48, borderRadius: 0, }}
@@ -280,6 +280,7 @@ class Search_bar_similar extends React.Component {
         <View>
             <Score_Bar/>
             <Line_chart_similar/>
+
         </View>
       }
       </View>

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 })
 
 const data_1 = [
-    { x: 0, y: 70 },
+    { x: 0, y: 30 },
     { x: 1, y: 45 },
     { x: 2, y: 55 },
     { x: 3, y: 0 },
@@ -40,10 +40,9 @@ const data_1 = [
     { x: 6, y: 45 },
     { x: 7, y: 55 },
     { x: 8, y: 0 },
-    { x: 9, y: 100 },
+    { x: 9, y: 20 },
   ]
-
-const data_2 = [
+  const data_2 = [
     { x: 0, y: 40 },
     { x: 1, y: 95 },
     { x: 2, y: 75 },
@@ -55,25 +54,99 @@ const data_2 = [
     { x: 8, y: 10 },
     { x: 9, y: 50 },
   ]
+  let data_1_mean=0;
+  let sum_1=0;
+  for (let i=0; i<data_1.length; i++){
+    sum_1+=data_1[i].y;
+  }
+  data_1_mean = sum_1/data_1.length;
+
+  let data_2_mean=0;
+  let sum_2=0;
+  for (let i=0; i<data_2.length; i++){
+    sum_2+=data_2[i].y;
+  }
+  data_2_mean = sum_2/data_2.length;
+
+  let delta = data_2_mean- data_1_mean;
+  if(delta>=0){
+    for (let i=0; i<data_1.length; i++){
+      data_1[i].y+=delta;
+    }
+  }
+
+  else{
+    for (let i=0; i<data_2.length; i++){
+      data_2[i].y+=(-delta);
+    }
+  }
+
+  let data_1_max= 0;
+  for (let i=0; i<data_1.length; i++){
+    if(data_1[i].y>data_1_max){
+      data_1_max = data_1[i].y
+    }
+
+  }
+
+  let data_2_max= 0;
+  for (let i=0; i<data_2.length; i++){
+    if(data_2[i].y>data_2_max){
+      data_2_max = data_2[i].y
+    }
+
+  }
+
+  let data_1_min= 999999999999999;
+  for (let i=0; i<data_1.length; i++){
+    if(data_1[i].y<data_1_min){
+      data_1_min = data_1[i].y
+    }
+
+  }
+
+  let data_2_min= 999999999999999;
+  for (let i=0; i<data_2.length; i++){
+    if(data_2[i].y<data_2_min){
+      data_2_min= data_2[i].y
+    }
+
+  }
+
+
+  let data_total_max = 0;
+  if(data_1_max >= data_2_max) data_total_max = data_1_max;
+  else data_total_max = data_2_max;
+
+  let data_total_min = 0;
+  if(data_1_min >= data_2_min) data_total_min = data_2_min;
+  else data_total_min = data_1_min;
+
+  let data_total_length = data_1.length;
+
+  
+
+
+
 
 const Line_chart_similar = () => {
 
     return (
         <View>
-            <Text>11</Text>
+            
             <Chart
               style={styles.chart_container}
-              xDomain={{ min: 0, max: 9 }}
-              yDomain={{ min: 0, max: 100 }}
+              xDomain={{ min: 0, max: data_total_length-1 }}
+              yDomain={{ min: data_total_min, max: data_total_max }}
               
             >
             
-              <VerticalAxis tickValues={[]} theme={{
+              <VerticalAxis tickValues={[data_total_max]} theme={{
                 axis: {
                   visible: false,
                 },
               }} />
-              <HorizontalAxis tickCount={0} theme={{
+              <HorizontalAxis tickCount={data_total_length} theme={{
                 axis: {
                   visible: true,
                 },

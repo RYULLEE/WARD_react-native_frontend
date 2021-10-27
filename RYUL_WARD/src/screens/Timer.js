@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import RNPickerDialog from 'rn-modal-picker';
 import { Chart, VerticalAxis, HorizontalAxis, Line, Tooltip } from 'react-native-responsive-linechart'
 import { DB } from '../utils/firebase';
+import { DATA } from '../utils/stock_info';
 
 
 const styles = StyleSheet.create({
@@ -355,28 +356,13 @@ class Search_Bar_name extends React.Component {
 }
 
 const Timer = ({ navigation }) => {
-  const [stock_info, setStock_info] = useState([]);
-  useEffect(()=> {
-    const unsubscribe = DB.collection('Market_info')
-          //.orderBy('name')
-          .onSnapshot(snapshot =>{
-            const list =[];
-          snapshot.forEach(doc=>{
-            let obj ={};
-            obj["name"] = doc.data()["한글 종목약명"]; 
-            list.push(obj);
-          });
-          setStock_info(list);
-          });
-          return ()=> unsubscribe();
-  }, []);
 
     return(
         <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
             <Text style={styles.subtitle}>Timing Score</Text>
 
-            <Search_Bar_name search_data = {stock_info}/> 
+            <Search_Bar_name search_data = {DATA}/> 
         </ScrollView>
         </SafeAreaView>
     );

@@ -72,7 +72,7 @@ const Category_Etc = ({navigation}) => {
         
           <View style={styles.large_container}>
           <View style={styles.row_container}>
-            <TouchableOpacity onPress= {() => navigation.navigate('SIMILAR')}>
+            <TouchableOpacity onPress= {() => navigation.navigate('SIMILAR', { send_name: ''})}>
             <Image
                 style={{height:wp('100%')/375*120 , width: wp('100%')/375*249, borderRadius : 10,}}
                 source={require('../image/analysis_1.png')}

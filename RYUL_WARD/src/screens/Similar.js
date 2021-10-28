@@ -1,4 +1,4 @@
-import React,{Component, useLayoutEffect, useState} from 'react';
+import React,{Component, useLayoutEffect, useState, useEffect} from 'react';
 import { Button,useWindowDimensions,  Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
@@ -12,6 +12,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler'
 import SelectDropdown from 'react-native-select-dropdown';
 import RNPickerDialog from 'rn-modal-picker';
 import Search_bar_similar from '../components/Search_bar_similar';
+import { useNavigation } from '@react-navigation/core';
+import Search_bar_similar2 from '../components/Search_bar_similar2';
 
 const Pf_options = ["단기", "중기", "장기"];
 
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
       lineHeight: 20,
       fontSize: 18,
       marginLeft: 16,
-      marginTop: 25,
+      marginTop: 40,
     },
   
     top_row_smallcontainer : {
@@ -123,6 +125,12 @@ const styles = StyleSheet.create({
 
           marginLeft : 16,
           marginTop : 20,
+        },
+        gray_bar : {
+          width : wp('100%'),
+          height : wp('100%')/375*8,
+          backgroundColor : '#EEEEEE',
+          marginTop : 40,
         }
 
       
@@ -153,12 +161,12 @@ const FlatList_data = [
   },
   {
     id : '3',
-    name:"네이버",
+    name:"기아",
     imageUrl:require('../image/similar_name_3.png'),
   },
   {
     id : '4',
-    name:"카카오뱅크",
+    name:"애플",
     imageUrl:require('../image/similar_name_4.png'),
   },
   {
@@ -168,26 +176,41 @@ const FlatList_data = [
   },
   {
     id : '6',
-    name:"카카오뱅크",
+    name:"마지막",
     imageUrl:require('../image/similar_name_4.png'),
   },
 ]
 
 
 
-let select_name='1111111';
+var select_name='1111111';
 
-const FlatList_item = ({name, imageUrl}) =>{
 
-   
-  const Select_flatlist_item = () => {
-    select_name={name}
+const FlatList_item = ({name, imageUrl,id},{ALGORITHM}) =>{
+  
+  const navigation = useNavigation();
+  const [count, setCount] = useState(0)
+  const[color_change, setcolor_change] = useState(false)
+  useEffect(() => {
+    //console.log({name});
+    select_name ={name}.name
+    //console.log({select_name});
+    
+    
+  },[count,navigation])
+
+  function Navigate_func(){
+    setCount(count + 1)
+    
+    navigation.navigate('SIMILAR', { send_name: {name}.name})
+    setcolor_change(!(color_change))
+    
   }
   return(
-  <TouchableOpacity onPress={Select_flatlist_item}>
+  <TouchableOpacity onPress= {() =>Navigate_func()}>
   <View style={{alignItems : 'center', justifyContent : 'center', marginRight : 20,}}>
    <Image
-      style={{ height: wp('100%')/375*48, width: wp('100%')/375*48,  }}
+      style={{ height: wp('100%')/375*48, width: wp('100%')/375*48, borderWidth : 2, borderColor : color_change?'red':'black'  }}
       source={imageUrl}
     />
     <Text style={styles.FlatList_item_text}>{name}</Text>
@@ -196,15 +219,18 @@ const FlatList_item = ({name, imageUrl}) =>{
   );
 };
 
-const Similar = ({navigation}) => {
+const Similar = ({navigation, route:{params}}) => {
 
-  
-  
+     
+    
+    
+
       return (
         <SafeAreaView>
-        <ScrollView style={{backgroundColor:'#ffffff',}}>
+        <ScrollView style={{backgroundColor:'#ffffff',}} >
 
             <View style={styles.top_row_container_1}>
+  
             <Text style={styles.subtitle}>유사도 점수</Text>
 
             <View style={styles.top_row_smallcontainer}>
@@ -226,7 +252,9 @@ const Similar = ({navigation}) => {
             </View>
             </View>
 
-            <Search_bar_similar selected_name = {select_name}/>
+            <Search_bar_similar selected_name = {params.send_name}/>
+
+            <View style={styles.gray_bar}/>
 
             <Text style={styles.subtitle_2}>상위 유사 종목</Text>
 
@@ -234,13 +262,20 @@ const Similar = ({navigation}) => {
             <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl}/>)} keyExtractor={item=>item.id} />
             </View>
 
+            <View style={styles.gray_bar}/>
+
             <Text style={styles.subtitle_2}>함께 분산투자하면 좋은 종목</Text>
 
             <View style={styles.FlatList_container}>
             <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl}/>)} keyExtractor={item=>item.id} />
             </View>
             
+            <View style={styles.gray_bar}/>
 
+            <Text style={styles.subtitle_2}>다른 종목과도 분석해보세요!</Text>
+
+            <Search_bar_similar2 />
+            
 
         </ScrollView>
         </SafeAreaView>

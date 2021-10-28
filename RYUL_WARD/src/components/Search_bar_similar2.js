@@ -150,7 +150,7 @@ const show_name=false;
 
 
 
-class Search_bar_similar extends React.Component {
+class Search_bar_similar2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -245,52 +245,14 @@ class Search_bar_similar extends React.Component {
               color='#8D7EB5'            
           />
         </View>      
-      </View>
-      <View>
-      { (this.state.selectedText!=''?true:false) &&
-        <View style={styles.name_row_container}>
-          <View style={{flexDirection : 'row', }}>
-          <Image
-                    style={{ height: wp('100%')/375*48, width: wp('100%')/375*48, borderRadius: 0, }}
-                    source={require('../image/similar_name_1.png')}
-          />
-          <View style={styles.name_row_inside_conatiner_1_left}>
-            <Text style={styles.name_text}>{this.state.selectedText}</Text>
-            <Text style={styles.name_sub_text}>선택한종목 설명</Text>
-          </View>
-          </View>
-
-          <View style={{flexDirection : 'row', }}>
-          
-          <View style={styles.name_row_inside_conatiner_1_right}>
-            <Text style={styles.name_text}>{this.props.selected_name}</Text>
-            <Text style={styles.name_sub_text}>{this.props.selected_name}</Text>
-          </View>
-          <Image
-                    style={{ height: wp('100%')/375*48, width: wp('100%')/375*48, borderRadius: 0, }}
-                    source={require('../image/similar_name_2.png')}
-          />
-          </View>
-        </View>
-      }
-      </View>
-
-      <View>
-      { (this.state.selectedText!=''?true:false) && 
-        <View>
-            <Score_Bar/>
-            <Line_chart_similar/>
-
-        </View>
-      }
-      </View>
       
-
-
+      
+        
+        </View>
       </View>
       
     );
   }
 }
 
-export default Search_bar_similar;
+export default Search_bar_similar2;

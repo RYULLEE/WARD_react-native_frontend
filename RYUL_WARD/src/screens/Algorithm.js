@@ -6,6 +6,7 @@ import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab
 import SelectDropdown from 'react-native-select-dropdown';
 import Plotly from 'react-native-plotly';
 import { DB } from '../utils/firebase';
+import { DATA } from '../utils/stock_info';
 
 const styles = StyleSheet.create({
 
@@ -221,19 +222,20 @@ const Item = ({item, color}) => {
   let img_url = `${prefix}/stock_image%2F${stock_num}.png?alt=media`;
   const [stock_name, setStock_name] = useState([]);
   useEffect(()=> {
-    const unsubscribe = DB.collection('Market_info')
-      .where("단축코드", "==", stock_num)
-      .onSnapshot(snapshot =>{
-        const list =[];
-        snapshot.forEach(doc=>{
-          let obj = doc.data();
-          obj["id"] = doc.id;
-          list.push(obj);
-          console.log(list[0]["한글 종목약명"]);
-        });
-        setStock_name(list[0]["한글 종목약명"]);
-      });
-        return ()=> unsubscribe();
+    let i = 0;
+    while(stock_num[i]==0){
+      i++;
+    }
+    let n_stock_num = stock_num.substring(i, 6)
+    let len_stock = DATA.length
+    for(let j =0; j<len_stock; j++){
+      if(DATA[j]["code"] == n_stock_num){
+        console.log(DATA[j]["name"])
+        setStock_name(DATA[j]["name"]);
+        break
+      }
+    }
+    console.log(n_stock_num);
   }, [item]);
 
   //console.log(img_url)
@@ -263,7 +265,7 @@ const formatData = (data, numColumns) => {
 }
 
 const Algorithm = ({ route:{params}}) => {
-  console.log(params);
+  //console.log(params);
   const [stock_info_1, setStock_info_1] = useState([]);
   const [stock_info_2, setStock_info_2] = useState([]);
   const [stock_info_3, setStock_info_3] = useState([]);
@@ -388,12 +390,11 @@ const Radar_chart_12 = () => {
                 buttonTextStyle={styles.select_box_text}
                 rowTextStyle={styles.select_box_text_under}
                 renderDropdownIcon={icon}
-                
               />
             </View>
           </View>
-
         </View>
+
         <Text style={styles.subtitle}>알고리즘 스코어</Text>
         <View style={styles.row_explain_container}>
         <Image
@@ -463,11 +464,8 @@ const Radar_chart_12 = () => {
               <Item item = {item} color = {"#69C356"}/>
             )}
             numColumns = {4}
-            
             />
         </View>
-
-        
         </ScrollView>
     </SafeAreaView>
   );

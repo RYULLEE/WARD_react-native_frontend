@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {images} from '../utils/images'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { DB } from '../utils/firebase';
 
 const width = Dimensions.get('window').width;
 
@@ -237,7 +238,8 @@ const Home = ({ navigation,route }) => {
       ),
     });
   }, []);
-  
+
+
   return (
       <SafeAreaView>
         <ScrollView style={{backgroundColor:'#ffffff',}}>

@@ -12,6 +12,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { useNavigation } from '@react-navigation/native';
 import { DB } from '../utils/firebase';
 import {images} from '../utils/images'
+import { DATA } from '../utils/stock_info';
 
 
 const width = Dimensions.get('window').width;

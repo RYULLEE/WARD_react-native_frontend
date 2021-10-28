@@ -149,7 +149,7 @@ const formatData = (data, numColumns) => {
 
 const Page_1=({Home, CATEGORY}) => {
   const handleItemPress = params => {
-    navigation.navigate('ALGORITHM', params);
+    navigation.navigate('TIMER', params);
 };
 
   const [algo_info, setAlgo_info] = useState([]);

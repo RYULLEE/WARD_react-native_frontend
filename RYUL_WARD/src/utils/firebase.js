@@ -24,3 +24,4 @@ export const logout = async() => {
 };
 
 export const DB = firebase.firestore();
+

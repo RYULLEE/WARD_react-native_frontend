@@ -11,6 +11,8 @@ import Category_Timing from '../screens/Category_Timing';
 import Category_Portfolio from '../screens/Category_Portfolio';
 import Category_Etc from '../screens/Category_Etc';
 import Similar from '../screens/Similar';
+import Thema from '../screens/Thema';
+import Effect from '../screens/Effect';
 
 const Stack2 = createStackNavigator();
 
@@ -92,7 +94,19 @@ const CategoryStack = () => {
             //headerStyle: { height : 60},
             }}/>
             
+            <Stack2.Screen name='THEMA' component={Thema} options={{ title: '' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>
 
+            <Stack2.Screen name='EFFECT' component={Effect} options={{ title: '' }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>
 
         </Stack2.Navigator>
 

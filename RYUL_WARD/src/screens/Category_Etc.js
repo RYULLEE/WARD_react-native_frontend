@@ -72,7 +72,7 @@ const Category_Etc = ({navigation}) => {
         
           <View style={styles.large_container}>
           <View style={styles.row_container}>
-            <TouchableOpacity onPress= {() => navigation.navigate('SIMILAR', { send_name: ''})}>
+            <TouchableOpacity onPress= {() => navigation.navigate('SIMILAR', { send_name: '', light_array_send:[]})}>
             <Image
                 style={{height:wp('100%')/375*120 , width: wp('100%')/375*249, borderRadius : 10,}}
                 source={require('../image/analysis_1.png')}
@@ -93,7 +93,7 @@ const Category_Etc = ({navigation}) => {
                 source={require('../image/analysis_0.png')}
             />
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {() => navigation.navigate('EFFECT')}>
               <Image
                   style={{height:wp('100%')/375*120 , width: wp('100%')/375*281, borderRadius : 10,}}
                   source={require('../image/analysis_2.png')}
@@ -103,13 +103,13 @@ const Category_Etc = ({navigation}) => {
           </View>
 
           <View style={styles.row_container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {() => navigation.navigate('THEMA')}>
             <Image
                 style={{height:wp('100%')/375*120 , width: wp('100%')/375*239, borderRadius : 10,}}
                 source={require('../image/analysis_3.png')}
             />
             <Text style={styles.title_text}>테마주 분석</Text>
-            </TouchableOpacity>
+            </TouchableOpacity >
             <Image
                 style={{height:wp('100%')/375*120 , width: wp('100%')/375*94, borderRadius : 10,}}
                 source={require('../image/analysis_0.png')}

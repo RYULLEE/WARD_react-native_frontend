@@ -153,31 +153,37 @@ const FlatList_data = [
     id : '1',
     name:"네이버",
     imageUrl:require('../image/similar_name_3.png'),
+    index : '0',
   },
   {
     id : '2',
     name:"카카오뱅크",
     imageUrl:require('../image/similar_name_4.png'),
+    index : '1',
   },
   {
     id : '3',
     name:"기아",
     imageUrl:require('../image/similar_name_3.png'),
+    index : '2',
   },
   {
     id : '4',
     name:"애플",
     imageUrl:require('../image/similar_name_4.png'),
+    index : '3',
   },
   {
     id : '5',
     name:"네이버",
     imageUrl:require('../image/similar_name_3.png'),
+    index : '4',
   },
   {
     id : '6',
     name:"마지막",
     imageUrl:require('../image/similar_name_4.png'),
+    index:'5',
   },
 ]
 
@@ -186,31 +192,53 @@ const FlatList_data = [
 var select_name='1111111';
 
 
-const FlatList_item = ({name, imageUrl,id},{ALGORITHM}) =>{
+const FlatList_item = ({index,name, imageUrl, light_array}) =>{
   
   const navigation = useNavigation();
   const [count, setCount] = useState(0)
-  const[color_change, setcolor_change] = useState(false)
+  const[color_change, setcolor_change] = useState({0:false, 1:false,2:false,3:false,4:false,5:false})
   useEffect(() => {
     //console.log({name});
     select_name ={name}.name
     //console.log({select_name});
-    
+    //console.log(index)
+    //setcolor_change(color_change[index]=!color_change[index])
     
   },[count,navigation])
 
   function Navigate_func(){
     setCount(count + 1)
-    
-    navigation.navigate('SIMILAR', { send_name: {name}.name})
-    setcolor_change(!(color_change))
+    console.log(index)
+    //console.log(light_array)
+    if(index==0){
+      light_array_change=[true,false,false,false,false,false]
+    }
+    else if(index==1){
+      light_array_change=[false,true,false,false,false,false]
+    }
+    else if(index==2){
+      light_array_change=[false,false,true,false,false,false]
+    }
+    else if(index==3){
+      light_array_change=[false,false,false,true,false,false]
+    }
+    else if(index==4){
+      light_array_change=[false,false,false,false,true,false]
+    }
+    else if(index==5){
+      light_array_change=[false,false,false,false,false,true]
+    }
+    navigation.navigate('SIMILAR', { send_name: {name}.name, light_array_send:light_array_change })
+    //setcolor_change(color_change[index]='pick')
+    //console.log(color_change)
     
   }
   return(
   <TouchableOpacity onPress= {() =>Navigate_func()}>
   <View style={{alignItems : 'center', justifyContent : 'center', marginRight : 20,}}>
+  <Text>{console.log(light_array)}</Text>
    <Image
-      style={{ height: wp('100%')/375*48, width: wp('100%')/375*48, borderWidth : 2, borderColor : color_change?'red':'black'  }}
+      style={{ height: wp('100%')/375*48, width: wp('100%')/375*48, borderWidth : 3, borderColor :light_array[index]?'red':'#EEEEEE'  }}
       source={imageUrl}
     />
     <Text style={styles.FlatList_item_text}>{name}</Text>
@@ -259,7 +287,7 @@ const Similar = ({navigation, route:{params}}) => {
             <Text style={styles.subtitle_2}>상위 유사 종목</Text>
 
             <View style={styles.FlatList_container}>
-            <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl}/>)} keyExtractor={item=>item.id} />
+            <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl} index={item.index} light_array={params.light_array_send}/>)} keyExtractor={item=>item.id} />
             </View>
 
             <View style={styles.gray_bar}/>
@@ -267,14 +295,15 @@ const Similar = ({navigation, route:{params}}) => {
             <Text style={styles.subtitle_2}>함께 분산투자하면 좋은 종목</Text>
 
             <View style={styles.FlatList_container}>
-            <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl}/>)} keyExtractor={item=>item.id} />
+            <FlatList horizontal={true} data={FlatList_data} renderItem={({item}) => (<FlatList_item name={item.name} imageUrl={item.imageUrl} index={item.index} light_array={[false,false,false,false,false,false,false,false,]}/>)} keyExtractor={item=>item.id} />
             </View>
-            
+
             <View style={styles.gray_bar}/>
 
             <Text style={styles.subtitle_2}>다른 종목과도 분석해보세요!</Text>
 
             <Search_bar_similar2 />
+            <View style={styles.gray_bar}/>
             
 
         </ScrollView>

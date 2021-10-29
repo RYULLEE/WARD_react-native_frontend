@@ -247,7 +247,6 @@ const Item = ({item, color}) => {
               borderColor: color,
               marginHorizontal: 12}}
               source={{uri: img_url}}
-              
             />
             <Text style={styles.tier_component_text}>{stock_name}</Text>
           </View>

@@ -4,7 +4,7 @@ import { View, Alert, TouchableOpacity, Text, StyleSheet,  Keyboard, TouchableWi
 import { Input} from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhiteSpace } from '../utils/common';
-import { signup } from '../utils/firebase';
+import { DB, signup } from '../utils/firebase';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -105,8 +105,13 @@ const Signup = ({Login}) => {
     setLoading(true);
     try{
       const user = await signup({email, password, name});
-      console.log(user);
       Alert.alert('Signup Success', user.email);
+      const data = {
+        phone : '',
+        nick_name: 'WARD'+user.uid.substring(0, 4),
+      };
+      const res = await DB.collection('personal_info').doc(user.uid).set(data);
+      console.log(data);
       navigation.navigate('Login');
       setLoading(false);
     } catch(e){

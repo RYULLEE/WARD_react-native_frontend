@@ -131,10 +131,10 @@ export const etc = ({navigation}) => {
       <TouchableOpacity onPress= {() => navigation.navigate('Question')} style={styles.etc_button}>
           <Text style={styles.etc_content}>자주하는 질문</Text>
       </TouchableOpacity>
+      {user?.uid && user?.email ? 
       <TouchableOpacity onPress= {() => navigation.navigate('User_admin')} style={styles.etc_button}>
         <Text style={styles.etc_content}>계정 관리</Text>
-      </TouchableOpacity>
-      
+      </TouchableOpacity>: <TouchableOpacity></TouchableOpacity>}
         {user?.uid && user?.email ? 
         <TouchableOpacity style={styles.etc_button} onPress={_handleLogout}>
         <Text style={styles.etc_content}>로그아웃</Text>
@@ -145,12 +145,12 @@ export const etc = ({navigation}) => {
         <View style={styles.info_container_0}>
 
         <View style={styles.info_container_2}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress= {() => navigation.navigate('Use_term_info', "use_term")}>
             <Text style={styles.info_text}>이용 약관</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.info_container_2}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress= {() => navigation.navigate('Service_intro')}>
           <Text style={styles.info_text}>WARD 서비스 소개</Text>
           </TouchableOpacity>
         </View>
@@ -158,12 +158,12 @@ export const etc = ({navigation}) => {
           <View style={styles.info_container_1}>
 
           <View style={styles.info_container_2}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {() => navigation.navigate('Personal_info', "personal")}>
             <Text style={styles.info_text}>개인 정보 처리</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.info_container_2}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {() => navigation.navigate('Recruiting')}>
             <Text style={styles.info_text}>WARD 채용</Text>
             </TouchableOpacity>
           </View>

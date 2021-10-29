@@ -18,15 +18,15 @@ const Label = styled.Text`
 `;
 
 const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
-  placeholderTextColor: theme.inputPlaceholder,
+  placeholderTextColor: 'black',
 }))`
-  padding: 5px 8px;
+  padding: 8px 8px;
   font-size: 16px;
   
   
 `;
 
-const Input = forwardRef(
+const Input_2 = forwardRef(
   (
     {
       label,
@@ -73,13 +73,13 @@ const Input = forwardRef(
   }
 );
 
-Input.defaultProps = {
+Input_2.defaultProps = {
   onBlur: () => {},
   onChangeText: () => {},
   onSubmitEditing: () => {},
 };
 
-Input.propTypes = {
+Input_2.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChangeText: PropTypes.func,
@@ -92,4 +92,4 @@ Input.propTypes = {
   disabled: PropTypes.bool,
 };
 
-export default Input;
+export default Input_2;

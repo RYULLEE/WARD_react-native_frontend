@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
       title_text : {
       
         fontFamily: 'NotoSansKR_500Medium',
-        fontSize : 14,
+        fontSize : 18,
         //lineHeight: 30,
         includeFontPadding: false,
         marginTop:11,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       },
       sub_text : {
         fontFamily: 'NotoSansKR_400Regular',
-        fontSize : 12,
+        fontSize : 14,
         //lineHeight: 30,
         includeFontPadding: false,
         marginBottom: 11,
@@ -38,16 +38,33 @@ const styles = StyleSheet.create({
         marginTop: 5,
 
       },
+      context_text : {
+        fontFamily: 'NotoSansKR_400Regular',
+        fontSize : 14,
+        //lineHeight: 30,
+        includeFontPadding: false,
+        marginBottom: 11,
+        color:'black',
+        marginTop: 5,
+      },
+      context_container:{
+        alignItems:'flex-start',
+        marginLeft: 16,
+        marginRight: 16,
+        marginTop: 16
+      },
 });
 
 const Item = ({item: {content, date, title}}) => {
   return(
-    <View>
-    <Text style={styles.title_text}>{title}</Text>
-    <Text style={styles.title_text}>{date}</Text>
-    <Text style={styles.title_text}>{content}</Text>
-    </View>
-  );
+    
+    <><View style={styles.notice_container}>
+      <Text style={styles.title_text}>{title}</Text>
+      <Text style={styles.sub_text}>{date}</Text>
+    </View><View style={styles.context_container}>
+        <Text style={styles.context_text}>{content}</Text>
+      </View></>
+    );
 };
 const Notice_component_1 = ({ navigation, route:{params} }) => {
     //console.log(params.id);

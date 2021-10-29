@@ -22,29 +22,35 @@ const styles = StyleSheet.create({
       title_text : {
       
         fontFamily: 'NotoSansKR_500Medium',
+        fontSize : 18,
+        //lineHeight: 30,
+        includeFontPadding: false,
+        marginVertical: 16, 
+
+      },
+      context_text : {
+        fontFamily: 'NotoSansKR_400Regular',
         fontSize : 14,
         //lineHeight: 30,
         includeFontPadding: false,
-        marginTop:11,
-
-      },
-      sub_text : {
-        fontFamily: 'NotoSansKR_400Regular',
-        fontSize : 12,
-        //lineHeight: 30,
-        includeFontPadding: false,
         marginBottom: 11,
-        color:'gray',
+        color:'black',
         marginTop: 5,
-
+      },
+      context_container:{
+        alignItems:'flex-start',
+        marginLeft: 16,
+        marginRight: 16,
+        marginTop: 16
       },
 });
 const Item = ({item: {question, answer}}) => {
   return(
-    <View>
-    <Text style={styles.title_text}>{question}</Text>
-    <Text style={styles.title_text}>{answer}</Text>
-    </View>
+    <><View style={styles.notice_container}>
+      <Text style={styles.title_text}>{question}</Text>
+    </View><View style={styles.context_container}>
+        <Text style={styles.context_text}>{answer}</Text>
+      </View></>
   );
 };
 

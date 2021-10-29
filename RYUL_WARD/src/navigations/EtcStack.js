@@ -10,6 +10,9 @@ import Question from '../screens/Question';
 import QuestionStack from './QuestionStack';
 import User_admin from '../screens/User_admin';
 import User_adminStack from './User_adminStack';
+import service_intro from '../screens/Service_intro';
+import recruit_info from '../screens/Recruiting';
+import Personal_info from '../screens/Personal_Info';
 
 const Stack3 = createStackNavigator();
 
@@ -52,6 +55,38 @@ const EtcStack = () => {
             }}/>
 
         <Stack3.Screen name='User_admin' component={User_adminStack} options={{ title: '계정 관리',headerShown: false}} screenOptions={{
+            headerTitleAlign: 'center',
+            headerTitle: 'login',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+        <Stack3.Screen name='Service_intro' component={service_intro} options={{ title: 'WARD 서비스 소개'}} screenOptions={{
+            headerTitleAlign: 'center',
+            headerTitle: 'login',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+        <Stack3.Screen name='Recruiting' component={recruit_info} options={{ title: 'WARD 채용'}} screenOptions={{
+            headerTitleAlign: 'center',
+            headerTitle: 'login',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+        
+        <Stack3.Screen name='Personal_info' component={Personal_info} options={{ title: '개인정보 처리방침'}} screenOptions={{
+            headerTitleAlign: 'center',
+            headerTitle: 'login',
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+        <Stack3.Screen name='Use_term_info' component={Personal_info} options={{ title: '이용 약관'}} screenOptions={{
             headerTitleAlign: 'center',
             headerTitle: 'login',
             headerBackTitleVisible: false,

@@ -389,49 +389,20 @@ const Home = ({ navigation,route }) => {
 
         <TouchableOpacity>
           <Image  style={{
-            height:wp('100%')/2/187*112, width: wp('100%')/2,}}
+            height:wp('100%')/2/187*112, width: wp('100%')/2, marginBottom: 40}}
             source={require('../image/upload_yours_1.png')}
           />
         </TouchableOpacity>
 
         <TouchableOpacity>
           <Image  style={{
-            height:wp('100%')/2/187*112, width: wp('100%')/2,}}
+            height:wp('100%')/2/187*112, width: wp('100%')/2, marginBottom: 40}}
             source={require('../image/upload_yours_2.png')}
           />
         </TouchableOpacity>
       </View>
 
-      <View style={styles.info_container_0}>
-
-        <View style={styles.info_container_2}>
-          <TouchableOpacity>
-            <Text style={styles.info_text}>이용 약관</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.info_container_2}>
-          <TouchableOpacity>
-          <Text style={styles.info_text}>WARD 서비스 소개</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.info_container_1}>
-
-        <View style={styles.info_container_2}>
-          <TouchableOpacity>
-          <Text style={styles.info_text}>개인 정보 처리</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.info_container_2}>
-          <TouchableOpacity>
-          <Text style={styles.info_text}>WARD 채용</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <Text style={styles.info_last_text_first}>WARD invest(주) | 대표 이찬규 | 010-9229-9388</Text>
-      <Text style={styles.info_last_text}>대전광역시 유성구 대학로 291 w5-2 2층 ( 한국과학기술원, 스타트업빌리지)</Text>
-      <Text style={styles.info_last_text_last}>copyright © WARD All rights reserved</Text>
+      
       </ScrollView> 
       </SafeAreaView> 
         

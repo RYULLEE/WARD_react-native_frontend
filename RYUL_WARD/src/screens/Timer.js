@@ -582,7 +582,7 @@ class Search_Bar_name extends React.Component {
             </View>  
 
             <Image
-              style={{ height: wp('100%')/375*170, width:wp('100%')/375*40, borderRadius: 10, marginLeft : 10,}}
+              style={{ height: wp('100%')/375*170, width:wp('100%')/375*40, borderRadius: 10, marginLeft : 10, marginBottom: 40}}
               source={require('../image/buy_sell.png')}
             />                
             </View>

@@ -12,7 +12,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler'
 import SelectDropdown from 'react-native-select-dropdown';
 import RNPickerDialog from 'rn-modal-picker';
 import Score_Bar from './Score_Bar';
-import Line_chart_similar from './Line_chart_similar';
+import Line_chart_effect from './Line_chart_effect';
 
 const styles = StyleSheet.create({
 
@@ -269,7 +269,7 @@ class Search_bar_effect extends React.Component {
       { (this.state.selectedText!=''?true:false) && 
         <View>
             
-            <Line_chart_similar/>
+            <Line_chart_effect/>
 
         </View>
       }

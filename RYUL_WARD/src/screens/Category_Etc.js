@@ -93,7 +93,7 @@ const Category_Etc = ({navigation}) => {
                 source={require('../image/analysis_0.png')}
             />
 
-            <TouchableOpacity onPress= {() => navigation.navigate('EFFECT')}>
+            <TouchableOpacity onPress= {() => navigation.navigate('EFFECT', { send_name: '', light_array_send:[]})}>
               <Image
                   style={{height:wp('100%')/375*120 , width: wp('100%')/375*281, borderRadius : 10,}}
                   source={require('../image/analysis_2.png')}

@@ -129,7 +129,7 @@ const data_1 = [
 
 
 
-const Line_chart_similar = () => {
+const Line_chart_effect = () => {
 
     return (
         <View>
@@ -160,10 +160,12 @@ const Line_chart_similar = () => {
             }} 
             
             />
-            <Area  data={data_2} smoothing="none" theme={{ 
-                gradient: { from : { color: '#FD7D7D', opacity: 1}, to : { color: '#F78484' , opacity: 0 }} 
-            
-            }} 
+            <Line  data={data_2} smoothing="none" theme={{ 
+                stroke: { color: '#FB7070', width: 2 }, 
+                scatter: { default: { width: 9, height: 9, rx: 10, color: '#FB7070' },
+                 },
+                
+            }}
             
             />
             
@@ -173,4 +175,4 @@ const Line_chart_similar = () => {
     );
 };
 
-export default Line_chart_similar;
+export default Line_chart_effect;

@@ -87,7 +87,7 @@ export class MyTest extends React.Component{
 
   render_item = (item) => {
     return (
-    
+      
       <View style={{ 
         width:(wp('100%')-50)/4,
         height:(wp('100%')-50)/4,
@@ -97,6 +97,7 @@ export class MyTest extends React.Component{
         alignItems:'center',}} key={item.key}>
         <Text style={styles.item_text}>{item.name}</Text>
       </View>
+      
       
     );
   }

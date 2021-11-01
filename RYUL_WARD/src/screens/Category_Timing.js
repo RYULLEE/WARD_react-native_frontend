@@ -257,6 +257,8 @@ const Tier_system = ({ navigation }) => {
           <View style={{height: 50+(wp('100%')/375*109+95)*numberOfFullRows}}>
           <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
             tabBarTextStyle={styles.tabBarTextStyle}
+            tabBarUnderlineStyle = {{ backgroundColor: "#82519E"}}
+            tabBarActiveTextColor = "#82519E"
           >
             <Page_1 tabLabel={'• 적중률순'}/>
               

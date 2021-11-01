@@ -12,6 +12,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { useNavigation } from '@react-navigation/native';
 import { DB } from '../utils/firebase';
 import {images} from '../utils/images'
+import { color } from 'react-native-reanimated';
 
 
 const width = Dimensions.get('window').width;
@@ -214,7 +215,7 @@ const Tier_system = ({ navigation }) => {
           <TouchableOpacity>
           <Image  style={{
             height:wp('100%')/375*200, width: wp('100%'),}}
-            source={{uri: images.Timer_Banner}}
+            source={{uri: images.Portfolio_Banner}}
           />
           </TouchableOpacity>
           <View style={styles.rowcontatiner}>
@@ -256,7 +257,10 @@ const Tier_system = ({ navigation }) => {
           
           <View style={{height: 50+(wp('100%')/375*109+95)*numberOfFullRows}}>
           <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}
+            
             tabBarTextStyle={styles.tabBarTextStyle}
+            tabBarUnderlineStyle = {{ backgroundColor: "#4D7D5D"}}
+            tabBarActiveTextColor = "#4D7D5D"
           >
             <Page_1 tabLabel={'• 적중률순'}/>
               

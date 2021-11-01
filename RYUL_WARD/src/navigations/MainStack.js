@@ -6,6 +6,9 @@ import TabNavigation from './Tab';
 import Algorithm from '../screens/Algorithm';
 import Ranking from '../components/ranking';
 import Search from '../screens/Search';
+import Home_2 from '../screens/Home_2';
+import Home_3 from '../screens/Home_3';
+import Home_4 from '../screens/Home_4';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +24,7 @@ const MainStack = () => {
                 //headerStyle: { height : 60},
                 }}>
            
-            <Stack.Screen name='Home' component={Home} options={{ title: 'W A R D' }} screenOptions={{
+            <Stack.Screen name='Home' component={Home} options={{ title: 'W A R D', headerShown: false, }} screenOptions={{
                 headerTitleAlign: 'center',
                 
                 headerBackTitleVisible: false,
@@ -47,6 +50,27 @@ const MainStack = () => {
             
             //headerStyle: { height : 60},
             }}/>    
+
+            <Stack.Screen name='HOME_2' component={Home_2} options={{ title: '', headerShown: false, }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>   
+
+            <Stack.Screen name='HOME_3' component={Home_3} options={{ title: '', headerShown: false, }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/>   
+
+            <Stack.Screen name='HOME_4' component={Home_4} options={{ title: '', headerShown: false, }} screenOptions={{
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
+            
+            //headerStyle: { height : 60},
+            }}/> 
             
         </Stack.Navigator>
     );

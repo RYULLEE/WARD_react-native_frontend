@@ -14,11 +14,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { DB } from '../utils/firebase';
-import Swiper from 'react-native-swiper';
-import Home_1 from './Home_1';
-import Home_2 from './Home_2';
-import Home_3 from './Home_3';
-import Home_4 from './Home_4';
 
 const width = Dimensions.get('window').width;
 
@@ -38,7 +33,7 @@ const Etc_Button_Container = styled.View`
 const styles = StyleSheet.create({
   
   background : {
-    backgroundColor : '#3A4057',
+    backgroundColor : '#4B4460',
     width : wp('100%'),
     height : wp('100%')/375*518,
   },
@@ -46,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection : 'row',
     width : wp('100%')-26,
     marginLeft : 36,
-    marginTop : wp('100%')/375*59,
+    marginTop : 16,
     alignItems : 'center',
     //backgroundColor : 'red',
     //justifyContent : 'center',
@@ -63,8 +58,7 @@ const styles = StyleSheet.create({
   },
 
   top_icon : {
-    marginLeft : 36,
-    marginTop : 16,
+    
     //backgroundColor : 'yellow',
     width : wp('100%')/375*28,
     height : wp('100%')/375*28,
@@ -72,11 +66,11 @@ const styles = StyleSheet.create({
 
   explain_container : {
     position : 'absolute',
-    marginTop : wp('100%')/375*137,
-    marginLeft : wp('100%')/375*166,
-    width : wp('100%')/375*174,
+    marginTop : wp('100%')/375*161,
+    marginLeft : wp('100%')/375*150,
+    //width : wp('100%')/375*174,
     //backgroundColor : 'yellow',
-    alignItems : 'flex-end'
+    //alignItems : 'flex-end'
   },
 
   explain_text : {
@@ -92,89 +86,82 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSansKR_500Medium',
     fontSize : 24,
     color : 'white',
-    marginVertical : 5,
+    marginVertical : 7,
     lineHeight: 30,
     includeFontPadding: false,
   },
-  wrapper: {
-    height : wp('100%')/375*518,
-  },
-  slide1: {
-    width : wp('100%'),
-    height : wp('100%')/375*518,
-  },
-  top10rowcontatiner: {
-    flexDirection: 'row',
-    marginLeft:36,
-    marginTop:16,
-  },
+
+  text_container : {
+      marginTop : wp('100%')/375*130,
+      marginLeft : 36,
+  }
 
 });
 
 
 
-const Home = ({ navigation,route }) => {
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerBackTitleVisible: false,
-      headerTintColor: 'black',
-      
-      headerRight: ({ tintColor }) => (
-        
-        <Ionicons
-          name="search"
-          size={25}
-          style={{ marginRight: 20 }}
-          color='gray'
-          onPress= {() => navigation.navigate('Search')}
-        />
-      ),
-    });
-  }, []);
+const Home_2 = ({navigation, route}) => {
+
+  
 
 
   return (
       
         <ScrollView style={{backgroundColor:'#ffffff',}}>
         
-        
         <View style={styles.background}>
-          <View style={styles.row_top_container}>
-            <TouchableOpacity>
-              <Ionicons name="options-outline" size={wp('100%')/375*28} color="white" />
+          
+            <TouchableOpacity onPress= {() => navigation.navigate('Home')}>
+              <Ionicons name="options-outline" size={wp('100%')/375*28} color="gray" style={{marginLeft : 36,
+    marginTop : wp('100%')/375*59,}} />
             </TouchableOpacity>
-            <Text style={styles.row_top_text}>종목 티어 시스템</Text>
+           
+         
+
+          <View style={styles.row_top_container}>
+          <TouchableOpacity >
+            <MaterialCommunityIcons name="clock-time-four-outline" size={wp('100%')/375*28} color="white" style={styles.top_icon} />
+          </TouchableOpacity>
+          <Text style={styles.row_top_text}>매매 타이밍</Text>
           </View>
 
-          <TouchableOpacity onPress= {() => navigation.navigate('HOME_2')}>
-            <MaterialCommunityIcons name="clock-time-four-outline" size={wp('100%')/375*28} color="gray" style={styles.top_icon} />
-          </TouchableOpacity>
+          
           <TouchableOpacity onPress= {() => navigation.navigate('HOME_3')}>
-            <MaterialCommunityIcons name="file-find" size={wp('100%')/375*28} color="gray" style={styles.top_icon} />
+            <MaterialCommunityIcons name="file-find" size={wp('100%')/375*28} color="gray" style={{marginLeft : 36,
+    marginTop : 16,}} />
           </TouchableOpacity>
-          <TouchableOpacity onPress= {() => navigation.navigate('HOME_4')}>
-            <Ionicons name="analytics-outline" size={wp('100%')/375*28} color="gray" style={styles.top_icon}/>
-          </TouchableOpacity>
+          
 
-          <Image  style={{
-            height:wp('100%')/375*102, width: wp('100%')/375*188, marginTop : 125, marginLeft : 36,}}
-            source={require('../image/home_tab_1.png')}
-          />
+          
+          <TouchableOpacity onPress= {() => navigation.navigate('HOME_4')}>
+            <Ionicons name="analytics-outline" size={wp('100%')/375*28} color="gray" style={{marginLeft : 36,
+    marginTop : 16,}}/>
+          </TouchableOpacity>
+          
+
+          
 
           <View style={styles.explain_container}>
-            <Text style={styles.explain_text}>와드는</Text>
-            <Text style={styles.explain_text}>지금 당장</Text>
-            <Text style={styles.explain_text}>투자하기 좋은</Text>
-              <View style={{flexDirection : 'row', alignItems : 'center'}}>
-                <Text style={styles.explain_text2}>종목군</Text> 
-                <Text style={styles.explain_text}> 을 추천합니다.</Text>
-              </View>
+          <Image  style={{
+            height:wp('100%')/375*152, width: wp('100%')/375*185}}
+            source={require('../image/home_tab_2.png')}
+          />
+          
           </View>
+
+          <View style={styles.text_container}>
+          <Text style={styles.explain_text}>와드는</Text>
+          <Text style={styles.explain_text}>최적의 수익률을 위한</Text>
+          <View style={{flexDirection : 'row', alignItems : 'center', }}>
+          <Text style={styles.explain_text2}>매매 타이밍</Text> 
+          <Text style={styles.explain_text}> 을 알려드립니다.</Text>
+          </View>
+        </View>
 
         </View>
 
-        
+
 
       </ScrollView> 
       
@@ -184,4 +171,4 @@ const Home = ({ navigation,route }) => {
         
   };
   
-  export default Home;
+  export default Home_2;

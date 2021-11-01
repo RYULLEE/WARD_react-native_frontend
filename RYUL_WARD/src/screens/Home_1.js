@@ -14,8 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { DB } from '../utils/firebase';
-import Swiper from 'react-native-swiper';
-import Home_1 from './Home_1';
+import Swiper from 'react-native-swiper'
 import Home_2 from './Home_2';
 import Home_3 from './Home_3';
 import Home_4 from './Home_4';
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection : 'row',
     width : wp('100%')-26,
     marginLeft : 36,
-    marginTop : wp('100%')/375*59,
+    marginTop : wp('100%')/375*69,
     alignItems : 'center',
     //backgroundColor : 'red',
     //justifyContent : 'center',
@@ -96,48 +95,45 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     includeFontPadding: false,
   },
-  wrapper: {
-    height : wp('100%')/375*518,
-  },
+  wrapper: {},
   slide1: {
-    width : wp('100%'),
-    height : wp('100%')/375*518,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB'
   },
-  top10rowcontatiner: {
-    flexDirection: 'row',
-    marginLeft:36,
-    marginTop:16,
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5'
   },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9'
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  }
+
 
 });
 
 
 
-const Home = ({ navigation,route }) => {
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerBackTitleVisible: false,
-      headerTintColor: 'black',
-      
-      headerRight: ({ tintColor }) => (
-        
-        <Ionicons
-          name="search"
-          size={25}
-          style={{ marginRight: 20 }}
-          color='gray'
-          onPress= {() => navigation.navigate('Search')}
-        />
-      ),
-    });
-  }, []);
+const Home_1 = () => {
+
+  
 
 
   return (
       
         <ScrollView style={{backgroundColor:'#ffffff',}}>
-        
         
         <View style={styles.background}>
           <View style={styles.row_top_container}>
@@ -147,13 +143,13 @@ const Home = ({ navigation,route }) => {
             <Text style={styles.row_top_text}>종목 티어 시스템</Text>
           </View>
 
-          <TouchableOpacity onPress= {() => navigation.navigate('HOME_2')}>
+          <TouchableOpacity >
             <MaterialCommunityIcons name="clock-time-four-outline" size={wp('100%')/375*28} color="gray" style={styles.top_icon} />
           </TouchableOpacity>
-          <TouchableOpacity onPress= {() => navigation.navigate('HOME_3')}>
+          <TouchableOpacity >
             <MaterialCommunityIcons name="file-find" size={wp('100%')/375*28} color="gray" style={styles.top_icon} />
           </TouchableOpacity>
-          <TouchableOpacity onPress= {() => navigation.navigate('HOME_4')}>
+          <TouchableOpacity >
             <Ionicons name="analytics-outline" size={wp('100%')/375*28} color="gray" style={styles.top_icon}/>
           </TouchableOpacity>
 
@@ -174,7 +170,6 @@ const Home = ({ navigation,route }) => {
 
         </View>
 
-        
 
       </ScrollView> 
       
@@ -184,4 +179,4 @@ const Home = ({ navigation,route }) => {
         
   };
   
-  export default Home;
+  export default Home_1;

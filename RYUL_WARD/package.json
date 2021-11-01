@@ -20,6 +20,7 @@
     "@valdio/react-native-scrollable-tabview": "^0.8.12",
     "expo": "~42.0.1",
     "expo-app-loading": "1.1.2",
+    "expo-document-picker": "^9.2.4",
     "expo-font": "^9.2.1",
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
@@ -67,8 +68,7 @@
     "react_native_tabbed_container": "0.0.4",
     "rn-modal-picker": "^0.3.2",
     "styled-components": "^5.3.1",
-    "victory-native": "^35.5.5",
-    "expo-document-picker": "~9.2.4"
+    "victory-native": "^35.5.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

@@ -147,6 +147,7 @@ const Home = ({ navigation,route }) => {
             <Text style={styles.row_top_text}>종목 티어 시스템</Text>
           </View>
 
+<<<<<<< HEAD
           <TouchableOpacity onPress= {() => navigation.navigate('HOME_2')}>
             <MaterialCommunityIcons name="clock-time-four-outline" size={wp('100%')/375*28} color="gray" style={styles.top_icon} />
           </TouchableOpacity>
@@ -156,12 +157,47 @@ const Home = ({ navigation,route }) => {
           <TouchableOpacity onPress= {() => navigation.navigate('HOME_4')}>
             <Ionicons name="analytics-outline" size={wp('100%')/375*28} color="gray" style={styles.top_icon}/>
           </TouchableOpacity>
+=======
+      <Text style={styles.subtitle}>WARD Youtube</Text>
+
+      <View style={styles.youtube_rowcontainer}>
+        <TouchableOpacity>
+        <Image  style={{
+          height:wp('100%')/373*93, width: wp('100%')/373*167, borderRadius: 10, }}
+          source={require('../image/ward_youtube_1.png')}
+        />
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Image  style={{
+          height:wp('100%')/373*93, width: wp('100%')/373*167, borderRadius: 10, }}
+          source={require('../image/ward_youtube_2.png')}
+        />
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.subtitle}>Upload Yours</Text>
+      
+      <View style={styles.upload_container} >
+
+        <TouchableOpacity>
+          <Image  style={{
+            height:wp('100%')/2/187*112, width: wp('100%')/2, marginBottom: 40}}
+            source={require('../image/upload_yours_1.png')}
+          />
+        </TouchableOpacity>
+>>>>>>> ca51e3875ac0bd3da00344347ffbf1b54caa1627
 
           <Image  style={{
+<<<<<<< HEAD
             height:wp('100%')/375*102, width: wp('100%')/375*188, marginTop : 125, marginLeft : 36,}}
             source={require('../image/home_tab_1.png')}
+=======
+            height:wp('100%')/2/187*112, width: wp('100%')/2, marginBottom: 40}}
+            source={require('../image/upload_yours_2.png')}
+>>>>>>> ca51e3875ac0bd3da00344347ffbf1b54caa1627
           />
 
+<<<<<<< HEAD
           <View style={styles.explain_container}>
             <Text style={styles.explain_text}>와드는</Text>
             <Text style={styles.explain_text}>지금 당장</Text>
@@ -176,6 +212,9 @@ const Home = ({ navigation,route }) => {
 
         
 
+=======
+      
+>>>>>>> ca51e3875ac0bd3da00344347ffbf1b54caa1627
       </ScrollView> 
       
         

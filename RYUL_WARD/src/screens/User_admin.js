@@ -1,4 +1,4 @@
-import React,{Component, useState, useContext} from 'react';
+import React,{Component, useState, useContext, useEffect} from 'react';
 import { Alert, Button,useWindowDimensions, TouchableOpacity, Image, View, Text, SafeAreaView, StyleSheet, FlatList, Animated, Touchable } from 'react-native';
 import styled from 'styled-components/native';
 import { Dimensions, Platfrom, ScrollView } from 'react-native';
@@ -12,6 +12,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Input_2 } from '../components/';
 import { UserContext } from '../contexts';
 import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { DB } from '../utils/firebase';
+import { set } from 'react-native-reanimated';
 
 
 const styles = StyleSheet.create({
@@ -204,6 +206,18 @@ const User_admin = ({ navigation }) => {
     const handlePhonenum = input_num => {
       setPhonenum(input_num);
     };
+
+    const onDoublecheck= async() => {
+      const personalRef = DB.collection('personal_info');
+      const snapshot = await personalRef.where('nick_name', '==', nickname).get();
+      if(snapshot.empty){
+        Alert.alert('Available nickname', nickname);
+      }
+      else{
+        Alert.alert('Unavailable nickname', nickname);
+        setNickname('WARD'+user.uid.substring(0, 4))
+      }
+    }
     
     function onCheckmarkPress_1() {
       onChange_1(!checked_1);
@@ -214,17 +228,41 @@ const User_admin = ({ navigation }) => {
       console.log("2:", checked_2);
     }
 
-    const handleSave_success = () => {
+    const handleSave_success = async() => {
       Alert.alert('Successfuly Saved', user.email);
       console.log(user, nickname, phonenum,);
+      const data = {
+        phone : phonenum,
+        nick_name: nickname,
+      };
+      try{
+        const res = await DB.collection('personal_info').doc(user.uid).set(data);
+      } catch(e){
+        Alert.alert('Saving Error', e.message);
+      }
+      
       //console.log("saved");
     };
     const handleSave_fail = () => {
       Alert.alert('약관에 동의하지 않으셨습니다', user.email);
+
       //console.log("failed");
     };
 
-    //console.log(user, nickname, phonenum,);
+    useEffect(()=> {
+      const unsubscribe = DB.collection('personal_info')
+        .doc(user.uid)
+        .onSnapshot(doc => {
+          const list = [];
+          list.push(doc.data());
+          //console.log(list);
+          setNickname(list[0]["nick_name"]);
+          setPhonenum(list[0]["phone"]);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    console.log(nickname, phonenum,);
     return (
         <ScrollView style={{backgroundColor:'#ffffff'}}>
 
@@ -236,12 +274,12 @@ const User_admin = ({ navigation }) => {
               <Input_2
               value = {nickname}
               onChangeText = {handleNickname}
-              placeholder = "Nickname"
+              placeholder = {nickname}
               returnKeyType = "next"
               />
               </View>
-            <TouchableOpacity>
-                  <View style={styles.check_container}>
+            <TouchableOpacity onPress={onDoublecheck}>
+                  <View style={styles.check_container} >
                       <Text style={styles.submit_text}>중복 확인</Text>
                   </View>
                   </TouchableOpacity>
@@ -270,6 +308,7 @@ const User_admin = ({ navigation }) => {
             <Input_2
               value = {phonenum}
               onChangeText = {handlePhonenum}
+              placeholder = {phonenum}
               returnKeyType = "next"
             />
             </View>

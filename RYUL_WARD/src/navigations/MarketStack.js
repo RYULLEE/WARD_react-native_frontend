@@ -8,6 +8,7 @@ import Algorithm from '../screens/Algorithm';
 import Search from '../screens/Search';
 import Market from '../screens/Market';
 import upload_idea from '../screens/Upload_idea';
+import upload_algorithm from '../screens/Upload_algorithm';
 
 const Stack7 = createStackNavigator();
 
@@ -40,6 +41,14 @@ const MarketStack = () => {
             }}/>
 
             <Stack7.Screen name='Upload_idea' component={upload_idea} options={{ title: '아이디어 업로드' }} screenOptions={{
+            headerTitleAlign: 'center',
+            
+            headerBackTitleVisible: false,
+            headerTitleStyle : { fontSize : 100,fontFamily: 'NotoSansKR_400Regular'},
+            //headerStyle: { height : 60},
+            }}/>
+
+            <Stack7.Screen name='Upload_algorithm' component={upload_algorithm} options={{ title: '알고리즘 업로드' }} screenOptions={{
             headerTitleAlign: 'center',
             
             headerBackTitleVisible: false,

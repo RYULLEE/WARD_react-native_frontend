@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const upload_idea = ({ navigation, route:{params} }) => {
+const upload_algorithm = ({ navigation, route:{params} }) => {
   const {title, setTitle} = useState("");
   const {context, setContext} = useState("");
 
@@ -132,7 +132,7 @@ const upload_idea = ({ navigation, route:{params} }) => {
               returnKeyType = "next"
               />
           </View>
-        <Text style={styles.sub_title}>아이디어 설명</Text>
+        <Text style={styles.sub_title}>알고리즘 설명</Text>
 
         <View style={styles.input_container}>
         <TextInput
@@ -168,4 +168,4 @@ const upload_idea = ({ navigation, route:{params} }) => {
     );
 };
 
-export default upload_idea;
+export default upload_algorithm;

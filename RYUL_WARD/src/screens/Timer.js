@@ -428,7 +428,12 @@ class Search_Bar_name extends React.Component {
       selectedImage: '',
       selectedMarket: '',
       selectedCorrect: '',
-      defaultValue: true,
+      defaultValue: {
+        "code": "5930",
+        "id": 953,
+        "market": "KOSPI",
+        "name": "삼성전자",
+      },
       select: '',
       value: '',
       selectedData: [

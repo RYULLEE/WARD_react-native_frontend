@@ -93,7 +93,7 @@ const Market = ({navigation, route}) => {
 
         <Text style={styles.subtitle}>WARD에서 당신의 알고리즘을 판매하세요</Text>
         <View style={styles.bottom_row_container}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress= {() => navigation.navigate('Upload_algorithm')}>
             <Image
                 style={{height:wp('100%')/375*102 , width: wp('100%')/375*166, 
                 borderRadius : 5,

@@ -3,6 +3,7 @@ import config from '../../firebase.json';
 import 'firebase/firestore';
 
 const app = firebase.initializeApp(config)
+export const storage = firebase.storage();
 
 const Auth = app.auth();
 

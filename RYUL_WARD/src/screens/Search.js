@@ -8,22 +8,23 @@ import { ListItem, SearchBar } from "react-native-elements";
 
 import { DB } from '../utils/firebase';
 import { render } from 'react-dom';
+import { DATA } from '../utils/algorithm_info';
 
 const width = Dimensions.get('window').width;
 
 
-  const Item = ({ title }) => {
+  const Item = ({ name }) => {
     return (
         <TouchableOpacity>
             <View style={styles.item}>
-                <Text style={styles.input_text} >{title}</Text>
+                <Text style={styles.input_text} >{name}</Text>
             </View>
         </TouchableOpacity>
     );
   };
   
 
-  const renderItem = ({ item }) => <Item title={item.title} />;
+  const renderItem = ({ item }) => <Item name={item.name} />;
 
   let search_text_under='인기 검색';
   let search_text_under_height=60;
@@ -33,7 +34,6 @@ const width = Dimensions.get('window').width;
   //console.log(Data);
 
   class Search_Bar extends Component {
-    //const [algo_info, setAlgo_info] = useState([]);
 
     constructor(props) {
       //console.log(props.search_data);
@@ -49,7 +49,7 @@ const width = Dimensions.get('window').width;
     
     searchFunction = (text) => {
       const updatedData = this.arrayholder.filter((item) => {
-        const item_data = `${item.title.toUpperCase()})`;
+        const item_data = `${item.name.toUpperCase()})`;
         const text_data = text.toUpperCase();
         return item_data.indexOf(text_data) > -1;
       });
@@ -185,27 +185,6 @@ const Search = ({ navigation }) => {
   const collection = ['tier_system', 'timing_algo', 'portfolio_algo','etc_algo'];
   //const ref = useRef();
   
-
-  useEffect(()=> {
-    async function make_data() {
-        let list =[];
-        await DB
-          .collection(collection[0])
-          .orderBy('name')
-          .onSnapshot(snapshot =>{
-            snapshot.forEach(doc=>{
-            let obj = doc.data();
-            obj["title"] = obj["name"];
-            list.push(obj);
-            //console.log(list);
-            });
-          //console.log(list);
-        setAlgo_info(list);
-      });
-    };
-    make_data();
-  }, []);
-
   //console.log(algo_info);
 
   return (
@@ -213,7 +192,7 @@ const Search = ({ navigation }) => {
       <ScrollView style={{backgroundColor:'#ffffff'}}>
           <View style={styles.top_container}>
           
-          <Search_Bar search_data = {algo_info}/>
+          <Search_Bar search_data = {DATA}/>
           <View style={styles.back_container}>
             <Ionicons
                 name="arrow-back-outline"

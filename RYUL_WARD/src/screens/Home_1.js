@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { DB } from '../utils/firebase';
-
+import Constants from 'expo-constants';
 import Home_2 from './Home_2';
 import Home_3 from './Home_3';
 import Home_4 from './Home_4';

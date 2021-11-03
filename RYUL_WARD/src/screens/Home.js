@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { DB } from '../utils/firebase';
-
+import Constants from 'expo-constants';
 import Home_1 from './Home_1';
 import Home_2 from './Home_2';
 import Home_3 from './Home_3';
@@ -112,13 +112,13 @@ const styles = StyleSheet.create({
   background : {
     backgroundColor : '#3A4057',
     width : wp('100%'),
-    height : wp('95%')/375*518,
+    height : wp('95%')/375*508,
   },
   row_top_container : {
     flexDirection : 'row',
     width : wp('100%')-26,
     marginLeft : 36,
-    marginTop : wp('100%')/375*59,
+    marginTop : wp('100%')/375*29+(Platform.OS === 'ios' ? 0 : Constants.statusBarHeight),
     alignItems : 'center',
     //backgroundColor : 'red',
     //justifyContent : 'center',
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
   explain_container : {
     position : 'absolute',
-    marginTop : wp('100%')/375*137,
+    marginTop : wp('100%')/375*117,
     marginLeft : wp('100%')/375*166,
     width : wp('100%')/375*174,
     //backgroundColor : 'yellow',
@@ -275,6 +275,7 @@ const Home = ({ navigation,route }) => {
 
   return (
       
+        <SafeAreaView style={{ flex:0, backgroundColor: '#3A4057' }}>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
         
         
@@ -297,7 +298,7 @@ const Home = ({ navigation,route }) => {
           </TouchableOpacity>
 
           <Image  style={{
-            height:wp('100%')/375*102, width: wp('100%')/375*188, marginTop : 125, marginLeft : 36,}}
+            height:wp('100%')/375*102, width: wp('100%')/375*188, marginTop : Platform.OS === 'ios' ? 145 : 125, marginLeft : 36,}}
             source={require('../image/home_tab_1.png')}
           />
 
@@ -330,8 +331,9 @@ const Home = ({ navigation,route }) => {
         
 
       </ScrollView> 
+      </SafeAreaView>
       
-        
+      
       
     );
         

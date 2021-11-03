@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { DB } from '../utils/firebase';
-
+import Constants from 'expo-constants';
 const width = Dimensions.get('window').width;
 
 const Container = styled.View`
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   background : {
     backgroundColor : '#62504F',
     width : wp('100%'),
-    height : wp('95%')/375*518,
+    height : wp('95%')/375*508,
   },
   row_top_container : {
     flexDirection : 'row',
@@ -249,14 +249,14 @@ const Home_3 = ({navigation, route}) => {
 
 
   return (
-      
+    <SafeAreaView style={{ flex:0, backgroundColor: '#62504F' }}>
         <ScrollView style={{backgroundColor:'#ffffff',}}>
         
         <View style={styles.background}>
           
             <TouchableOpacity onPress= {() => navigation.navigate('Home')}>
               <Ionicons name="options-outline" size={wp('100%')/375*28} color="gray" style={{marginLeft : 36,
-    marginTop : wp('100%')/375*59,}} />
+    marginTop :wp('100%')/375*29+(Platform.OS === 'ios' ? 0 : Constants.statusBarHeight),}} />
             </TouchableOpacity>
            
          
@@ -321,7 +321,7 @@ const Home_3 = ({navigation, route}) => {
 
       </ScrollView> 
       
-        
+        </SafeAreaView>
       
     );
         

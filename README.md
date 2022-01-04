@@ -34,7 +34,8 @@
 > > NoticeStack.js : Notice, Notice_component_1
 > > QuestionStack.js : Question, Question_component_1
 
-> src\components
+> src\components // 주요화면 및 contents
+> <br>
 > > TabBarComponent.js : Bottom-Tab navigation component 삽입
 > > <br/>
 > > <img src="https://user-images.githubusercontent.com/80392577/148074237-766a51cc-43b9-42ad-ba7a-acca85d08c03.png" width="200" height="418"/>
@@ -46,6 +47,8 @@
 > > Score_Bar.js : 점수 표시해주는 ui 제작  
 > > <br/>
 > > <img src="https://user-images.githubusercontent.com/80392577/148071983-caf277dc-8d86-4552-af0f-dd0766bb086c.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148084875-72378ca1-4feb-4bdb-ad7d-9c8d77e81bd5.png" width="200" height="418"/>
+
 
 
 > > Search_Bar_similar.js : 유사도 분석시 두개의 종목 검색, 선택  
@@ -53,7 +56,10 @@
 > > <img src="https://user-images.githubusercontent.com/80392577/148071190-3ede3f34-730d-4e57-94a8-a5d4014e961b.png" width="200" height="418"/>
 > > <img src="https://user-images.githubusercontent.com/80392577/148072644-b1cdd7c9-f77f-49ae-a1df-c029f66f94f8.png" width="200" height="418"/>
 
-
+> > Effect.js : 영향 요인 진단, 클릭 항목별 line chart 와 area chart 동시 불러옴  
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085203-a501fd17-c7ef-4a40-8a4b-f7b7e0ca7086.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085482-c5223e38-05be-4e21-9f8f-3e7cd8c25f31.png" width="200" height="418"/>
 
 > > Search_Bar.js : 메인 검색버튼 구현, 알고리즘 전체 검색 가능    
 > > <br/>
@@ -63,12 +69,21 @@
 > > <br/>
 > > <img src="https://user-images.githubusercontent.com/80392577/148071769-f3f81436-03a0-471b-ba24-b790fb027bcf.png" width="200" height="418"/>
 > > <img src="https://user-images.githubusercontent.com/80392577/148075180-d28ca31e-1810-475d-9d66-a826410cc128.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148083846-1355d345-ded1-4569-8ca4-687bffeecd0e.png" width="200" height="418"/>
 
-  
+> > Portfolio.js : 분산투자 유효성 검증, 레이더 차트 구현
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148084562-a1a6f227-5f15-40b7-b79e-975ff5cbeca4.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148084671-e780d09f-60c2-433a-bb2c-de7c4db77b36.png" width="200" height="418"/> 
 
 > > Thema.js : 테마주별 드래그 후 이동, 재정렬 기능  
 > > <br/>
 > > <img src="https://user-images.githubusercontent.com/80392577/148073106-272af6fb-cfc8-4cae-b8f8-267812b756fd.png" width="200" height="418"/>
+
+> > Upload_algorithm.js : 사용자가 파일 자유롭게 업로드 가능
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085665-023a42a5-2f73-47b0-a3c3-8793d31ef058.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085861-8f73c244-8016-4285-aa88-a7187cc9d663.png" width="200" height="418"/>
 
 
 

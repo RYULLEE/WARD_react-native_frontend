@@ -6,7 +6,7 @@
 
 
 
-<img src="https://user-images.githubusercontent.com/80392577/148022033-8cf96d19-1b5a-47d1-ad71-bd55cee46f47.png" width="480" height="300"/>
+<img src="https://user-images.githubusercontent.com/80392577/148022033-8cf96d19-1b5a-47d1-ad71-bd55cee46f47.png" width="50%"/>
 
 > 2020년 코로나 시대에 수많은 개인은 주식을 처음 시작하게 되었고, 21년부터 투자에 어려움을 느끼기 시작하여 저희는 그 이유를 분석하고 해결책을 제시하고자 합니다. 저희는 다음에 해당하는 3가지 해결책을 제시했습니다.  
 
@@ -14,7 +14,7 @@
 > 2. 기술적 분석 점수화 ( 기술적 분석 결과를 100점 만점 점수로 표현 )
 > 3. 게임처럼 다양한 주식 분석툴 제공 ( 유사도 점수, 포트폴리오 진단, 테마주 새롭게 정의 )
 > 
-<img src="https://user-images.githubusercontent.com/80392577/148023123-562e069f-ef27-4ae1-aebc-1b29fa8bacb7.png" width="100%" height="220"/>
+<img src="https://user-images.githubusercontent.com/80392577/148023123-562e069f-ef27-4ae1-aebc-1b29fa8bacb7.png" width="95%"/>
 
 
 
@@ -62,32 +62,32 @@
 
 > > Effect.js : 영향 요인 진단, 클릭 항목별 line chart 와 area chart 동시 불러옴   
 > > <br/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148085203-a501fd17-c7ef-4a40-8a4b-f7b7e0ca7086.png" width="200" height="418"/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148085482-c5223e38-05be-4e21-9f8f-3e7cd8c25f31.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085203-a501fd17-c7ef-4a40-8a4b-f7b7e0ca7086.png" width="22%"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085482-c5223e38-05be-4e21-9f8f-3e7cd8c25f31.png" width="22%"/>
 
 > > Search_Bar.js : 메인 검색버튼 구현, 알고리즘 전체 검색 가능     
 > > <br/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148075300-49fe53db-e911-4a49-84e5-ff6803a6bd7b.png" width="200" height="418"/>   
+> > <img src="https://user-images.githubusercontent.com/80392577/148075300-49fe53db-e911-4a49-84e5-ff6803a6bd7b.png" width="22%"/>   
   
 > > RadarChartScreen.js : 각 알고리즘별 세가지 점수 방사형 차트, ScrollTabbar 사용   
 > > <br/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148071769-f3f81436-03a0-471b-ba24-b790fb027bcf.png" width="200" height="418"/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148075180-d28ca31e-1810-475d-9d66-a826410cc128.png" width="200" height="418"/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148083846-1355d345-ded1-4569-8ca4-687bffeecd0e.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148071769-f3f81436-03a0-471b-ba24-b790fb027bcf.png" width="22%"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148075180-d28ca31e-1810-475d-9d66-a826410cc128.png" width="22%"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148083846-1355d345-ded1-4569-8ca4-687bffeecd0e.png" width="22%"/>
 
 > > Portfolio.js : 분산투자 유효성 검증, 레이더 차트 구현   
 > > <br/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148084562-a1a6f227-5f15-40b7-b79e-975ff5cbeca4.png" width="200" height="418"/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148084671-e780d09f-60c2-433a-bb2c-de7c4db77b36.png" width="200" height="418"/> 
+> > <img src="https://user-images.githubusercontent.com/80392577/148084562-a1a6f227-5f15-40b7-b79e-975ff5cbeca4.png" width="22%"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148084671-e780d09f-60c2-433a-bb2c-de7c4db77b36.png" width="22%"/> 
 
 > > Thema.js : 테마주별 드래그 후 이동, 재정렬 기능    
 > > <br/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148073106-272af6fb-cfc8-4cae-b8f8-267812b756fd.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148073106-272af6fb-cfc8-4cae-b8f8-267812b756fd.png" width="22%"/>
 
 > > Upload_algorithm.js : 사용자가 파일 자유롭게 업로드 가능   
 > > <br/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148085665-023a42a5-2f73-47b0-a3c3-8793d31ef058.png" width="200" height="418"/>
-> > <img src="https://user-images.githubusercontent.com/80392577/148085861-8f73c244-8016-4285-aa88-a7187cc9d663.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085665-023a42a5-2f73-47b0-a3c3-8793d31ef058.png" width="22%"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148085861-8f73c244-8016-4285-aa88-a7187cc9d663.png" width="22%"/>
 
 
 
@@ -99,18 +99,18 @@
 > Authentication   
 > > Login, SignUp process 실시간 연동  
 > > Mail, ID 통한 로그인   
-> > <img src="https://user-images.githubusercontent.com/80392577/148097752-7e599777-bd94-4136-9ac4-ab1236995fa0.png" width="500" height="300"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148097752-7e599777-bd94-4136-9ac4-ab1236995fa0.png" width="40%"/>
  
 > > <br/>
 
 > DataBase   
 > > Whole Data of whole Algoruthm, Name and image of the Stock Ticker, etc Notice contents
 > > All data ( texts, images ) are connected online  
-> > <img src="https://user-images.githubusercontent.com/80392577/148097818-94c63a25-ff70-47dd-b8e1-e769f0c2de2a.png" width="500" height="300"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148097818-94c63a25-ff70-47dd-b8e1-e769f0c2de2a.png" width="40%"/>
 
 > Storage   
 > > 파일 업로드 기능    
-> > <img src="https://user-images.githubusercontent.com/80392577/148098234-6d57853b-b441-4357-84aa-1a3df75f300f.png" width="500" height="300"/>  
+> > <img src="https://user-images.githubusercontent.com/80392577/148098234-6d57853b-b441-4357-84aa-1a3df75f300f.png" width="40%"/>  
 
 
 ## APP File

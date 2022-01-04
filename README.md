@@ -6,7 +6,7 @@
 
 
 
-<img src="https://user-images.githubusercontent.com/80392577/148022033-8cf96d19-1b5a-47d1-ad71-bd55cee46f47.png" width="400" height="300"/>
+<img src="https://user-images.githubusercontent.com/80392577/148022033-8cf96d19-1b5a-47d1-ad71-bd55cee46f47.png" width="480" height="300"/>
 
 > 2020년 코로나 시대에 수많은 개인은 주식을 처음 시작하게 되었고, 21년부터 투자에 어려움을 느끼기 시작하여 저희는 그 이유를 분석하고 해결책을 제시하고자 합니다. 저희는 다음에 해당하는 3가지 해결책을 제시했습니다.  
 

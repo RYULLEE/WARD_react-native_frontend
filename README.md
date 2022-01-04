@@ -16,12 +16,6 @@
 
 ## FRONTEND ( React Native )
 
-> src\components
-> > Line_chart_similar.js : 두개의 차트 동시에 꺾은선으로 표시, 유사도 값 표시 ( data input : firebase storage )  
-> > Score_Bar.js : 점수 표시해주는 ui 제작  
-> > Search_Bar_similar.js : 유사도 분석시 두개의 종목 검색, 선택  
-> > Search_Bar.js : 메인 검색버튼 구현, 알고리즘 전체 검색 가능   
-
 > src\navigations
 > > AuthStack.js : 로그인 screen 스택  
 > > Category.js : 카테고리 screen 스택  
@@ -29,6 +23,54 @@
 > > MainStack.js : 메인 screen 스택  
 > > NoticeStack.js : 공지사항 screen 스택  
 > > QuestionStack.js : 질문사항 screen 스택  
+
+> src\screens  
+> > Stack_Name : Sreens,stacks,or utils which consist this Stack_Name  
+
+> > AuthStack : Login, Signup  
+> > Category.js : Category, Tier_system, Category_Timing, Category_Portfolio, Category_Etc, Algorithm, Portfolio, Timer, Similar, Thema, Effect
+> > EtcStack.js : Etc, AuthStack, NoticeStack, QuestionStack, User_adminStack, service_intro, recruit_info, Personal_info
+> > MainStack.js : Home, Ranking, Algorithm, Search, Home_2, Home_3, Home_4
+> > NoticeStack.js : Notice, Notice_component_1
+> > QuestionStack.js : Question, Question_component_1
+
+> src\components
+> > TabBarComponent.js : Bottom-Tab navigation component 삽입
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148074237-766a51cc-43b9-42ad-ba7a-acca85d08c03.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148074311-f78d74a9-b2a4-495d-932c-649890b114f6.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148074419-514cec6a-29c4-43d3-b3aa-d2fa668f5ec3.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148074487-26166c86-17da-41b6-8bfa-9d1c683b8ae6.png" width="200" height="418"/>
+
+> > Line_chart_similar.js : 두개의 차트 동시에 꺾은선으로 표시, 유사도 값 표시 ( 모든 차트 data input : firebase storage )  
+> > Score_Bar.js : 점수 표시해주는 ui 제작  
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148071983-caf277dc-8d86-4552-af0f-dd0766bb086c.png" width="200" height="418"/>
+
+
+> > Search_Bar_similar.js : 유사도 분석시 두개의 종목 검색, 선택  
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148071190-3ede3f34-730d-4e57-94a8-a5d4014e961b.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148072644-b1cdd7c9-f77f-49ae-a1df-c029f66f94f8.png" width="200" height="418"/>
+
+
+
+> > Search_Bar.js : 메인 검색버튼 구현, 알고리즘 전체 검색 가능    
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148075300-49fe53db-e911-4a49-84e5-ff6803a6bd7b.png" width="200" height="418"/>   
+  
+> > RadarChartScreen.js : 각 알고리즘별 세가지 점수 방사형 차트, ScrollTabbar 사용 
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148071769-f3f81436-03a0-471b-ba24-b790fb027bcf.png" width="200" height="418"/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148075180-d28ca31e-1810-475d-9d66-a826410cc128.png" width="200" height="418"/>
+
+  
+
+> > Thema.js : 테마주별 드래그 후 이동, 재정렬 기능  
+> > <br/>
+> > <img src="https://user-images.githubusercontent.com/80392577/148073106-272af6fb-cfc8-4cae-b8f8-267812b756fd.png" width="200" height="418"/>
+
+
 
 
 

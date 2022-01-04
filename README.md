@@ -21,12 +21,12 @@
 ## FRONTEND ( React Native )  /RYUL_WARD FOLDER
 
 > src\navigations
-> > AuthStack.js : 로그인 screen 스택  
-> > Category.js : 카테고리 screen 스택  
-> > EtcStack.js : 더보기 screen 스택  
-> > MainStack.js : 메인 screen 스택  
-> > NoticeStack.js : 공지사항 screen 스택  
-> > QuestionStack.js : 질문사항 screen 스택  
+> > AuthStack.js : 로그인 screen Stack   
+> > Category.js : 카테고리 screen Stack   
+> > EtcStack.js : 더보기 screen Stack     
+> > MainStack.js : 메인 screen Stack     
+> > NoticeStack.js : 공지사항 screen Stack     
+> > QuestionStack.js : 질문사항 screen Stack     
 
 > src\screens  
 > > Stack_Name : Sreens,stacks,or utils which consist this Stack_Name  
